@@ -1,0 +1,105 @@
+<resources>
+    <style name="Drowner" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/lightBlue</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:colorForeground">@color/white</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimaryInverse">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColorSecondaryInverse">@color/colorAccent</item>
+        <item name="android:textColorTertiary">@color/black</item>
+        <item name="preferenceTheme">@style/DrownerPreferenceTheme</item>
+        <item name="buttonStyle">@style/DrownerMainButton</item>
+        <item name="iconColor">@color/icon_color_drowner</item>
+        <item name="iconColorPressed">@color/icon_color_drowner_pressed</item>
+        <item name="borderColor">@color/border_color_drowner</item>
+        <item name="aboutLogoColor">@color/logo_color_drowner</item>
+        <item name="navIconColor">@color/nav_icon_color_drowner</item>
+        <item name="fabColor">@color/fab_color_drowner</item>
+        <item name="fabColorPressed">@color/fab_color_pressed_drowner</item>
+        <item name="toolbarTextColor">@color/toolbar_text_color_drowner</item>
+        <item name="toolbarBackground">@color/toolbar_background_drowner</item>
+        <item name="radioButtonColor">@color/radio_button_color_drowner</item>
+        <item name="menuIconColor">@color/menu_icon_color_drowner</item>
+        <item name="plusIconColor">@color/plus_icon_color_drowner</item>
+        <item name="navBackground">@drawable/background2</item>
+
+        <!--ce dodam sem button style izgubim klik animacijo. Zato dokler ne pogruntam kako dodat
+        sem in obdrzat animacijo preprost k usakmu gumbu dodam theme.-->
+        <!--item name="android:buttonStyle">@style/DrownerMainButton</item>
+        <item name="buttonStyle">@style/DrownerMainButton</item-->
+    </style>
+    <style name="ToolBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">?attr/toolbarTextColor</item>
+        <item name="android:background">?attr/toolbarBackground</item>
+        <!--item name="android:textColorSecondary">@color/toolbarTextColor</item-->
+    </style>
+    <style name="DrownerMainButton" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:textSize">@dimen/title</item>
+        <item name="android:paddingBottom">@dimen/button_padding_bottom_top</item>
+        <item name="android:paddingTop">@dimen/button_padding_bottom_top</item>
+        <item name="android:paddingLeft">@dimen/button_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/button_padding_left_right</item>
+    </style>
+    <style name="DrownerPreferenceTheme" parent="PreferenceThemeOverlay">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="colorAccent">@color/lightBlue</item>
+        <item name="colorPrimary">@color/lightBlue</item>
+        <item name="colorPrimaryDark">@color/lightBlue</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+
+    <style name="VineLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--color primery - pofarba izbran element v nav view-->
+        <item name="colorPrimary">@color/black</item>
+        <!--vvrstica na vrh kjer kaze baterijo, uro, ipd-->
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/vineRed</item>
+        <item name="android:windowBackground">@color/white</item>
+        <!--colorforeground je recmo crta pr settings za kategorije-->
+        <item name="android:colorForeground">@color/vineRed</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <!--barva teksta gumbov-->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <!--login vnos, crta recmo-->
+        <item name="android:textColorSecondary">@color/vineRed</item>
+        <!--hm, ne porajtam nc v appu da bi se kje nucal ta secundary inverse-->
+        <item name="android:textColorSecondaryInverse">@color/black</item>
+        <!--register text, posti, cel profil tekst, about text, prakticn vs tekst xD-->
+        <item name="android:textColorTertiary">@color/black</item>
+        <item name="preferenceTheme">@style/VineRedPreferenceTheme</item>
+        <item name="buttonStyle">@style/VineRedMainButton</item>
+        <!--item name="android:imageButtonStyle">@style/DrownerMainButton</item-->
+        <item name="iconColor">@color/icon_color_light</item>
+        <item name="iconColorPressed">@color/icon_color_light_pressed</item>
+        <item name="borderColor">@color/border_color_light</item>
+        <item name="aboutLogoColor">@color/logo_color_light</item>
+        <item name="navIconColor">@color/nav_icon_color_light</item>
+        <item name="fabColor">@color/fab_color_light</item>
+        <item name="fabColorPressed">@color/fab_color_pressed_light</item>
+        <item name="toolbarTextColor">@color/toolbar_text_color_light</item>
+        <item name="toolbarBackground">@color/toolbar_background_light</item>
+        <item name="radioButtonColor">@color/radio_button_color_light</item>
+        <item name="menuIconColor">@color/menu_icon_color_light</item>
+        <item name="plusIconColor">@color/plus_icon_color_light</item>
+        <item name="navBackground">@drawable/background_light</item>
+    </style>
+    <style name="VineRedMainButton" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:textSize">@dimen/title</item>
+        <item name="android:paddingBottom">@dimen/button_padding_bottom_top</item>
+        <item name="android:paddingTop">@dimen/button_padding_bottom_top</item>
+        <item name="android:paddingLeft">@dimen/button_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/button_padding_left_right</item>
+    </style>
+    <style name="VineRedPreferenceTheme" parent="PreferenceThemeOverlay">
+        <item name="android:background">@color/white</item>
+        <item name="colorAccent">@color/vineRed</item>
+        <item name="colorPrimary">@color/vineRed</item>
+        <item name="colorPrimaryDark">@color/vineRed</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+</resources>

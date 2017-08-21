@@ -1,0 +1,69 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rosa.diplomska.ProfileFragment">
+
+    <TextView
+        android:id="@+id/textViewProfileUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-uporabnisk ime-"
+        android:textSize="@dimen/title"
+        android:layout_marginRight="@dimen/left_right_layout_margin"
+        android:layout_marginLeft="@dimen/left_right_layout_margin"
+        android:layout_marginTop="@dimen/profile_margin_top"
+        />
+
+    <TextView
+        android:id="@+id/textViewProfileEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-uporabnikov email-"
+        android:textSize="@dimen/title"
+        android:layout_marginRight="@dimen/left_right_layout_margin"
+        android:layout_marginLeft="@dimen/left_right_layout_margin"
+        android:layout_below="@+id/textViewProfileUsername"
+        android:layout_marginTop="@dimen/profile_margin_top" />
+
+    <TextView
+        android:id="@+id/textViewProfileOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hi! This is my description. I am bla bla bla from bla bla. I go to school in bla bla bla. I like bla bla bla."
+        android:layout_marginRight="@dimen/left_right_layout_margin"
+        android:layout_marginLeft="@dimen/left_right_layout_margin"
+        android:layout_marginTop="@dimen/profile_margin_top"
+        android:layout_below="@+id/textViewProfileEmail" />
+
+    <ImageView
+        android:id="@+id/edit_profile_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit_click"
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textViewProfileOther"
+        android:layout_alignRight="@+id/textViewProfileOther"
+        android:layout_alignEnd="@+id/textViewProfileOther"/>
+
+    <TextView
+        android:id="@+id/textViewMyActivities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_activities"
+        android:textSize="@dimen/title"
+        android:layout_marginLeft="@dimen/left_right_layout_margin"
+        android:layout_marginRight="@dimen/left_right_layout_margin"
+        android:layout_marginTop="@dimen/profile_edit_margin"
+        android:layout_below="@+id/edit_profile_data" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_profile"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/profile_edit_margin"
+        android:layout_below="@+id/textViewMyActivities"/>
+</RelativeLayout>

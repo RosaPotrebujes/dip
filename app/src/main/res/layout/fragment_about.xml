@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rosa.diplomska.AboutFragment">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/about_logo"
+        android:layout_width="@dimen/about_logo_size"
+        android:layout_height="@dimen/about_logo_size"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/about_margin_top_logo"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_author"
+        android:id="@+id/textViewAboutAuthor"
+        android:layout_below="@+id/about_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/about_logo_text_space" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_mentor"
+        android:id="@+id/textViewAboutMentor"
+        android:layout_marginTop="@dimen/about_between_text_space"
+        android:layout_below="@+id/textViewAboutAuthor"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
