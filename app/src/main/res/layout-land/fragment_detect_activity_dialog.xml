@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detect_activity_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.rosa.diplomska.view.activity.MainActivity">
+
+
+    <!--LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+        <Button
+            android:theme="@style/DrownerButton"
+            android:id="@+id/btnAutomaticDialog"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="AUTOMATIC" />
+
+        <Button
+            android:theme="@style/DrownerButton"
+            android:id="@+id/btnManualDialog"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="MANUAL" />
+    </LinearLayout-->
+
+    <RadioGroup
+        android:id="@+id/radioGrpDetectActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView4">
+        <RadioButton
+            android:id="@+id/radioBtnManual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonTint="?attr/radioButtonColor"
+            android:text="Manual" />
+
+        <RadioButton
+            android:id="@+id/radioBtnAutomatic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:buttonTint="?attr/radioButtonColor"
+            android:text="Automatic" />
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_below="@+id/radioGrpDetectActivity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/btnConfirmDialog"
+            android:theme="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Confirm"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/btnCancelDialog"
+            android:theme="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Cancel"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Please select how you would like to detect your activity."
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

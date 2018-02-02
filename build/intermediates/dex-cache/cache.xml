@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dom\.android\build-cache\0be23c218518ad280e3be318fd39e6278bc1c2c8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c6d3f8755f65e9a74a24a258578f424fd877cce4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dom\AppData\Local\Android\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_5cc0cd9c9796d8a8e6bae07e2fe18a2ba04c9a47\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f5a936848ac1a5539bf5b2f0901840fc7d3a99d1">
+        <dex dex="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_065ca99b5c6b58bd7e2a5253c3d397a3141db9ac\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\Dom\AndroidStudioProjects\Diplomska\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_993c384f2359bd95af9372c81ed16e0a88987b96\classes.dex" />
+    </item>
+
+</items>

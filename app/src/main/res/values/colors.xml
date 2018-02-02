@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9b989b</color>
+    <color name="colorAccent">#87959a</color>
+    <color name="primary_text_material_light">#97bafa</color>
+    <color name="button_color">#585858</color>
+    <color name="darkGray">#151515</color>
+    <color name="gray">#1C1C1C</color>
+    <color name="black">#000000</color>
+    <color name="pink">#fe2ef7</color>
+    <color name="lightBlue">#97bafa</color>
+    <color name="white">#ffffffff</color>
+    <color name="colorDark">#1C1C1C</color>
+    <color name="darkBlue">#3444bc</color>
+
+    <color name="vineRed">#B73265</color>
+    <color name="darkVineRed">#8F274F</color>
+
+    <color name="icon_color_drowner">@color/lightBlue</color>
+    <color name="icon_color_drowner_pressed">@color/darkBlue</color>
+    <color name="border_color_drowner">@color/lightBlue</color>
+    <color name="logo_color_drowner">@color/lightBlue</color>
+    <color name="nav_icon_color_drowner">@color/black</color>
+    <color name="fab_color_drowner">@color/lightBlue</color>
+    <color name="fab_color_pressed_drowner">@color/darkBlue</color>
+    <color name="fab_logo_color_drowner">@color/black</color>
+    <color name="toolbar_text_color_drowner">#97bafa</color>
+    <color name="toolbar_background_drowner">@color/black</color>
+    <color name="radio_button_color_drowner">@color/lightBlue</color>
+    <color name="menu_icon_color_drowner">@color/lightBlue</color>
+    <color name="plus_icon_color_drowner">@color/black</color>
+    <color name="alert_dialog_text_color_drowner">@color/black</color>
+    <color name="alert_dialog_button_color_drowner">@color/lightBlue</color>
+    <color name="alert_dialog_background_drowner">@color/button_color</color>
+
+    <!--TODO: izber barve za light theme-->
+    <color name="icon_color_light">@color/vineRed</color>
+    <color name="icon_color_light_pressed">@color/darkVineRed</color>
+    <color name="border_color_light">@color/vineRed</color>
+    <color name="logo_color_light">@color/vineRed</color>
+    <color name="nav_icon_color_light">@color/black</color>
+    <color name="fab_color_light">@color/vineRed</color>
+    <color name="fab_color_pressed_light">@color/darkVineRed</color>
+    <color name="fab_logo_color_light">@color/white</color>
+    <color name="toolbar_text_color_light">@color/white</color>
+    <color name="toolbar_background_light">@color/darkVineRed</color>
+    <color name="radio_button_color_light">@color/vineRed</color>
+    <color name="menu_icon_color_light">@color/white</color>
+    <color name="plus_icon_color_light">@color/white</color>
+    <color name="alert_dialog_text_color_light">@color/black</color>
+    <color name="alert_dialog_button_color_light">@color/vineRed</color>
+    <color name="alert_dialog_background_light">@color/white</color>
+
+    <!--TODO: Rainbow theme-->
+    <color name="red">#ff0000</color>
+    <color name="orange">#ea5e00</color>
+    <color name="yellow">#fff200</color>
+    <color name="green">#30f204</color>
+    <color name="blue">#7b89f9</color>
+    <color name="purple">#a6009d</color>
+</resources>
