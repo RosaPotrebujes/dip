@@ -9,7 +9,11 @@ import android.content.Context;
 
 import com.example.rosa.diplomska.model.Entity.Post;
 import com.example.rosa.diplomska.model.Entity.User;
-
+//TODO: migracija
+//migracija bo dodana kasneje
+//zaenkrat je brez da ko cem pocistit bazo, samo spremenim verzijo pa rebuildam
+//TODO: data sync
+//to bo tut prislo kasneje
 
 @Database(entities = { User.class, Post.class}, version = 1)
 @TypeConverters({RoomTypeConverters.class})

@@ -10,7 +10,10 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Base64;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,6 +24,7 @@ import com.example.rosa.diplomska.model.Entity.User;
 import com.example.rosa.diplomska.model.data.AppDatabase;
 import com.example.rosa.diplomska.navigator.LoginNavigator;
 import com.example.rosa.diplomska.navigator.MainNavigator;
+import com.example.rosa.diplomska.view.activity.MainActivity;
 import com.example.rosa.diplomska.view.fragment.FriendsFragment;
 import com.example.rosa.diplomska.view.fragment.HomeFragment;
 import com.example.rosa.diplomska.view.fragment.ProfileFragment;
@@ -30,8 +34,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +52,9 @@ import static com.android.volley.VolleyLog.TAG;
 public class DataProvider {
     MainNavigator mainNavigator;
     LoginNavigator loginNavigator;
-    private final String serverAddr = "http://192.168.1.119/ada_login_api/Source_Files/index.php";
+    private final String serverAddr = "http://192.168.0.102/ada_login_api/Source_Files/index.php"; //"http://192.168.1.119/ada_login_api/Source_Files/index.php";
+    final String detectAudioUrl = "http://192.168.0.102/ada_login_api/Source_Files/audioDetect.php";//"http://192.168.1.119/ada_login_api/Source_Files/audioDetect.php";
+
     public DataProvider() {
     }
     public DataProvider(MainNavigator navigator) {
@@ -104,7 +117,7 @@ public class DataProvider {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        VolleyLog.d(TAG, "Error: " + error.getMessage()+ Arrays.toString(error.getStackTrace()));
                         loginNavigator.lnAlertDialog("Ooops!","Something went wrong. Please try again later."); //Toast.makeText(loginActivity.getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         loginNavigator.enableLoginInterface();
                     }
@@ -602,6 +615,53 @@ public class DataProvider {
         //loginRequest.setRetryPolicy(new DefaultRetryPolicy( 1000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         appSingleton.addToRequestQueue(userPostsRequest,user_posts_TAG);
     }
+    public void insertUserPost(final Post post) {
+        String insert_post_URL = serverAddr;
+        String insert_post_TAG = "INSERT_POST_TAG";
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Map<String, String> params = new HashMap<>();
+        params.put("fun","addPost");
+        params.put("poster_id",Integer.toString(post.getPosterId()));
+        params.put("content",post.getContent());
+        params.put("timestamp",post.getTimestamp().toString());
+        params.put("favourite_counter",Integer.toString(post.getFavouriteCounter()));
+
+        JSONObject jp = new JSONObject(params);
+
+        JsonObjectRequest insertUserPostRequest = new JsonObjectRequest
+                (Request.Method.POST, insert_post_URL, jp, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getInt("success") == 0) {
+                                mainNavigator.mnAlertDialog("Ooops!",response.getString("message")); //Toast.makeText(loginActivity.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                                mainNavigator.getProfileFragment().deleteUserPost(post);
+                                //odstran post lokalno ce ni ratal
+                            } else {
+                                //navigator.mnAlertDialog("Done!",response.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace(); //Toast.makeText(loginActivity.getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            mainNavigator.mnAlertDialog("Ooops!","Error while parsing response."); //Toast.makeText(loginActivity.getApplicationContext(),"Error while parsing response.", Toast.LENGTH_LONG).show();
+                            mainNavigator.getProfileFragment().deleteUserPost(post);
+                            //odstran post lokalno ce ni ratal
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        mainNavigator.mnAlertDialog("Ooops!","Something went wrong. Please try again later."); //Toast.makeText(loginActivity.getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        //odstran post lokalno ce ni ratal
+                        mainNavigator.getProfileFragment().deleteUserPost(post);
+                    }
+                });
+        Context mContext = mainNavigator.getMNContext();
+        AppSingleton appSingleton = AppSingleton.getInstance(mContext);
+        //loginRequest.setRetryPolicy(new DefaultRetryPolicy( 1000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        appSingleton.addToRequestQueue(insertUserPostRequest,insert_post_TAG);
+    }
 
     //pogleda v lokalno bazo ce mamo podatke. če nimamo jih uzame z serverja pa jih pol shran v bazo.
     private class GetHomePostsTask extends AsyncTask<Void,Void,List<Post>>
@@ -613,11 +673,11 @@ public class DataProvider {
         }
         @Override
         protected void onPostExecute(List<Post> result) {
-            if(!result.isEmpty()) {
-                mainNavigator.getHomeFragment().setHomePosts(result);
-            } else {
+            //if(!result.isEmpty()) {
+            //    mainNavigator.getHomeFragment().setHomePosts(result);
+            //} else {
                 getHomePostsVolley();
-            }
+            //}
             super.onPostExecute(result);
         }
     }
@@ -645,11 +705,11 @@ public class DataProvider {
         }
         @Override
         protected void onPostExecute(List<Post> result) {
-            if(!result.isEmpty()) {
-                mainNavigator.getProfileFragment().setProfilePosts(result);
-            } else {
+            //if(!result.isEmpty()) {
+            //    mainNavigator.getProfileFragment().setProfilePosts(result);
+            //} else {
                 getUserPostsVolley();
-            }
+            //}
             super.onPostExecute(result);
         }
     }
@@ -675,11 +735,11 @@ public class DataProvider {
         }
         @Override
         protected void onPostExecute(List<User> result) {
-            if(!result.isEmpty()) {
-                mainNavigator.getFriendsFragment().setFriends(result);
-            } else {
+            //if(!result.isEmpty()) {
+            //    mainNavigator.getFriendsFragment().setFriends(result);
+            //} else {
                 loadUserFriendsVolley();
-            }
+            //}
             super.onPostExecute(result);
         }
     }
@@ -705,11 +765,11 @@ public class DataProvider {
         }
         @Override
         protected void onPostExecute(List<User> result) {
-            if(!result.isEmpty()) {
-                mainNavigator.getFriendsFragment().setPendingFriends(result);
-            } else {
+            //if(!result.isEmpty()) {
+            //    mainNavigator.getFriendsFragment().setPendingFriends(result);
+            //} else {
                 loadUserPendingFriendsVolley();
-            }
+            //}
             super.onPostExecute(result);
         }
     }

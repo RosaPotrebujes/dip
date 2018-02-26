@@ -47,14 +47,6 @@ public class ProfileFragment extends Fragment {
             binding.setMavm(viewModel);
             binding.setUser(ma.getUser());
         }
-
-    //    User u = new User(1,"username","email");
-    //    Post p1 = new Post(u.getUsername(),"lalala piost papa asfasf asdad.", new Timestamp(System.currentTimeMillis()));
-    //    Post p2 = new Post(u.getUsername(),"jajaja i am lorde jajaja lorde lorde lorde.", new Timestamp(System.currentTimeMillis()));
-    //    Post p3 = new Post(u.getUsername(),"bababa babanana bababa baba nananananaaaa.",new Timestamp(System.currentTimeMillis()));
-    //    Post p4 = new Post(u.getUsername(),"Mock mock mock mock mock mock mock mock mock mock.",new Timestamp(System.currentTimeMillis()));
-    //    Post p5 = new Post(u.getUsername(),"Laaa laaaa laaaa laaa laaaa laaaaaaaaaaa la la la la lal al al al a.",new Timestamp(System.currentTimeMillis()));
-
         binding.recyclerProfile.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -100,10 +92,12 @@ public class ProfileFragment extends Fragment {
         notifyProfileAdapterOfChange();
     }
 
-   // private void getPosts(){
-   //     posts = new ArrayList<>();
-   //     posts.add(new Post("Username", "Taking a bath while listening to Cradle of Filth with 2 other people.", Timestamp.valueOf("2014-08-05 18:19:03")));
-   //     posts.add(new Post("Username", "Plese na Lady Gaga - Alejandro v Krizankah z 20 ljudmi.",Timestamp.valueOf("2014-08-05 20:19:03")));
-   //     posts.add(new Post("Username", "Plese na techno glasbo v Cvetlicari z 10 ljudmi. Plese na techno glasbo v Cvetlicari z 10 ljudmi. Plese na techno glasbo v Cvetlicari z 10 ljudmi.",Timestamp.valueOf("2014-08-05 22:19:03")));
-   // }
+    public void addUserPost(Post p) {
+        this.posts.add(p);
+        notifyProfileAdapterOfChange();
+    }
+    public void deleteUserPost(Post p) {
+        this.posts.remove(p);
+        notifyProfileAdapterOfChange();
+    }
 }

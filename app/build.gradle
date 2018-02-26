@@ -8,6 +8,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
+        multiDexEnabled  true
         applicationId "com.example.rosa.diplomska"
         minSdkVersion 16
         targetSdkVersion 25
@@ -62,6 +63,9 @@ dependencies {
 
 
     testCompile 'junit:junit:4.12'
+
+//    compile 'com.github.yhcvb.HARAndroid:HARLib:v1.0'
+//    compile(name: 'weka-android-release', ext: 'aar')
 
     configurations.all {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->

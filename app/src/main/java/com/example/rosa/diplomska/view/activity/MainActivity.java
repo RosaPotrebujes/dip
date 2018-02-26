@@ -1,24 +1,19 @@
 package com.example.rosa.diplomska.view.activity;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -32,12 +27,20 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.rosa.diplomska.R;
+import com.example.rosa.diplomska.databinding.HeaderBinding;
+import com.example.rosa.diplomska.detector.DetectedActivitiesIntentService;
+import com.example.rosa.diplomska.detector.DetectorConstants;
+import com.example.rosa.diplomska.detector.LocationDetector;
 import com.example.rosa.diplomska.detector.MasterDetector;
-import com.example.rosa.diplomska.detector.MasterDetectorService;
+import com.example.rosa.diplomska.detector.PeopleDetectorService;
+import com.example.rosa.diplomska.detector.SongDetectorService;
+import com.example.rosa.diplomska.detector.UserActivity;
 import com.example.rosa.diplomska.model.Entity.Post;
 import com.example.rosa.diplomska.model.Entity.User;
 import com.example.rosa.diplomska.databinding.ActivityMainBinding;
@@ -51,21 +54,18 @@ import com.example.rosa.diplomska.view.fragment.SettingsFragment;
 import com.example.rosa.diplomska.viewModel.MainActivityViewModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import static android.content.ContentValues.TAG;
 
-public class MainActivity extends AppCompatActivity implements MainNavigator, NavigationView.OnNavigationItemSelectedListener, MasterDetector {
+
+
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+public class MainActivity extends AppCompatActivity implements MainNavigator,
+        NavigationView.OnNavigationItemSelectedListener, MasterDetector {
 
     private final static String SETTINGS_FRAGMENT_TAG = "SettingsFragment";
     private final static String PROFILE_FRAGMENT_TAG = "ProfileFragment";
@@ -80,99 +80,46 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
     FragmentManager fm;
     AddFriendDialogFragment df;
 
+    //detect activity
+    LocationDetector mLocationDetector;
+    BroadcastReceiver receiverS;
+    BroadcastReceiver receiverP;
+    BroadcastReceiver receiverL;
+    BroadcastReceiver receiverM;
 
-    boolean mBounded;
-    MasterDetectorService masterDetectorService;
-    MasterDetectorService.MasterDetectorBinder masterDetectorBinder;
+    IntentFilter filterS;
+    IntentFilter filterP;
+    IntentFilter filterL;
+    IntentFilter filterM;
 
+    private boolean isFSregistered = false;
+    private boolean isFPregistered = false;
+    private boolean isFLregistered = false;
+    private boolean isFMregistered = false;
+
+    private boolean detectionInprogress = false;
+
+    //permissions
     private final static int REQUEST_ENABLE_BT = 1;
     private final static int REQUEST_LOCATION = 2;
     private final static int REQUEST_CHECK_SETTINGS = 3;
+    private final static int REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO = 4;
 
     private BluetoothAdapter mBluetoothAdapter;
-    private int mPeople;
-    String mBTErrMsg;
-    BroadcastReceiver mReceiver;
 
     SharedPreferences pref;
-    //location
-    private LocationRequest mLocationRequest;
-    private long UPDATE_INTERVAL = 10 * 1000;  // 10 secs
-    private long FASTEST_INTERVAL = 5000; // 5 sec
-    private LocationSettingsRequest mLocationSettingsRequest;
-    private Task<LocationSettingsResponse> checkLocationSettingsTask;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private LocationCallback mLocationCallback;
-    private Location mLastKnownLocation;
-    private String resultMessage;
-    private String resultAddress;
-    MasterDetectorService.OnChangeListener mOnChangeListener = new MasterDetectorService.OnChangeListener() {
-        @Override
-        public void onDetectedLocation(String location) {
-            Toast.makeText(getMNContext(),"Location detection:"+location, Toast.LENGTH_LONG).show();
-
-        }
-        @Override
-        public void onDetectedPeople(int people) {
-            Toast.makeText(getMNContext(),"People detection:"+people, Toast.LENGTH_LONG).show();
-
-        }
-    };
-
-
-
-    private BroadcastReceiver  BReceiver = new BroadcastReceiver(){
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //put here whaterver you want your activity to do with the intent received
-        }
-    };
-
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBounded = true;
-            masterDetectorBinder = (MasterDetectorService.MasterDetectorBinder) service;
-            masterDetectorService = masterDetectorBinder.getService();
-            masterDetectorService.setOnChangeListener(new MasterDetectorService.OnChangeListener() {
-                @Override
-                public void onDetectedLocation(String location) {
-                    Toast.makeText(getMNContext(),"Location detection:"+location, Toast.LENGTH_LONG).show();
-                }
-                @Override
-                public void onDetectedPeople(int people) {
-                    Toast.makeText(getMNContext(),"People detection:"+people, Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Toast.makeText(getMNContext(),"Service is disconnected", Toast.LENGTH_LONG).show();
-            mBounded = false;
-            masterDetectorService = null;
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //change theme
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         String theme = pref.getString("appTheme", "1");
         if (theme.equals("1")) {
             setTheme(R.style.Drowner);
         } else if (theme.equals("2")) {
             setTheme(R.style.VineLight);
         }
-  //      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-  //      fab.setOnClickListener(new View.OnClickListener() {
-  //          @Override
-  //          public void onClick(View view) {
-  //              Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-  //                      .setAction("Action", null).show();
-  //          }
-  //      });
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         User user = new User(pref.getInt("userId",-1),pref.getString("username",""),pref.getString("email",""),pref.getString("description",""));
@@ -180,23 +127,12 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
 
         navigator = this;
         masterDetector = this;
-       // masterDetector = new MasterDetector(this, conn);
+
         fm = getSupportFragmentManager();
 
         viewModel = new MainActivityViewModel(navigator,masterDetector);
         binding.setMainViewModel(viewModel);
         super.onCreate(savedInstanceState);
-
-        /*//dialog
-        context = this;
-        dialog = new Dialog(context);
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setTitle("Detect activity");
-        dialog.setContentView(R.layout.fragment_detect_activity_dialog);
-        cancelDialog = (TextView) dialog.findViewById(R.id.btnCancelDialog);
-        //cancelDialog.setOnClickListener(viewModel);
-        confirmDialog = (TextView) dialog.findViewById(R.id.btnConfirmDialog);
-        //confirmDialog.setOnClickListener(viewModel);*/
 
         setSupportActionBar(binding.myToolbar);
         //myToolbar.setSubtitle("Test Subtitle");
@@ -211,6 +147,17 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
         }
 
         binding.navigationView.setNavigationItemSelectedListener(this);
+
+
+        //HeaderBinding navBinding = HeaderBinding.inflate(LayoutInflater.from(binding.navigationView.getContext()));
+        //navBinding.setUser(user);
+        //navBinding.navHeaderUsername.setText("usernaimu");
+        //navBinding.navHeaderEmail.setText(user.getEmail());
+
+        HeaderBinding b = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header, binding.navigationView, false);
+        binding.navigationView.addHeaderView(b.getRoot());
+        b.setUser(user);
+
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
@@ -229,8 +176,6 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
                     getSupportActionBar().setTitle(R.string.menu_settings);
             }
         }
-        Intent intent = new Intent(this, MasterDetectorService.class);
-        this.bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -274,9 +219,19 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
     }
     @Override
     public void onDestroy(){
+        unregisterDetectionReceivers();
         super.onDestroy();
-        this.unbindService(conn);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+    }
+    @Override
+    public void onPause() {
+        unregisterDetectionReceivers();
+        super.onPause();
+    }
+    @Override
+    public void onResume() {
+        registerDetectionReceivers();
+        super.onResume();
     }
     @Override
     public void setUpMainActivity() {
@@ -503,7 +458,23 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
                 }
                 return;
             }
+            case REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO: {
+                if (grantResults.length > 0) {
+                    boolean StoragePermission = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+                    boolean RecordPermission = grantResults[1] ==
+                            PackageManager.PERMISSION_GRANTED;
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                    SharedPreferences.Editor editor = pref.edit();
 
+                    if (StoragePermission && RecordPermission) {
+                        editor.putBoolean("music",true);
+                    } else {
+                        editor.putBoolean("music",false);
+                    }
+                    editor.apply();
+                }
+            }
 
             // other 'case' lines to check for other
             // permissions this app might request.
@@ -513,6 +484,16 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
     @Override
     public boolean checkIfBTSupported() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+    }
+
+    @Override
+    public boolean checkIfMusicDetectionSupported() {
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
+    }
+
+    @Override
+    public boolean checkIfMotionDetectionSupported() {
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
     }
 
     @Override
@@ -550,6 +531,15 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
             }
         }
+        if(pref.getBoolean("music",true)) {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this, new
+                        String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO);
+            }
+        }
     }
 
     @Override
@@ -558,316 +548,301 @@ public class MainActivity extends AppCompatActivity implements MainNavigator, Na
         if(!checkIfBTSupported()){
             editor.putBoolean("blueTooth", false);
         }
+        boolean b = checkIfGooglePlayServicesAvailable();
+        boolean b2 = checkIfGPSSupported();
         if(!checkIfGPSSupported() || !checkIfGooglePlayServicesAvailable()) {
             editor.putBoolean("location", false);
+        }
+        if(!checkIfMotionDetectionSupported()) {
+            editor.putBoolean("motion",false);
+        }
+        if(!checkIfMusicDetectionSupported()) {
+            editor.putBoolean("music",false);
         }
         editor.apply();
     }
 
+    private ActivityRecognitionClient mActivityRecognitionClient;
+    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 5 * 1000; // 5 seconds
+
     @Override
     public void startDetection() {
-        masterDetectorService.startBTDetection();
-        startLocationDetection();
-    }
+        if(detectionInprogress) {
+           return;
+        }
+        detectionInprogress = true;
 
-    @Override
-    public void startBTDetection() {
-/*        mReceiver = new BroadcastReceiver() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        checkSensorSupport();
+        askPermissions();
+
+        UserActivity ua = new UserActivity();
+        ua.setGotMusic(!pref.getBoolean("music",true));
+        ua.setGotLocation(!pref.getBoolean("location", true));
+        //ua.setGotMovement(!pref.getBoolean("motion",true));
+        ua.setGotMovement(false);
+        ua.setGotPeople(!pref.getBoolean("blueTooth",true));
+
+        ua.setUaUsername(getUser().getUsername());
+        ua.setOnActivityDoneListener(viewModel);
+        viewModel.setUserActivity(ua);
+
+        filterS = new IntentFilter();
+        filterS.addAction(DetectorConstants.ACTION_SONG_DETECTED);
+
+        filterP = new IntentFilter();
+        filterP.addAction(DetectorConstants.ACTION_PEOPLE_DETECTED);
+
+        filterL = new IntentFilter();
+        filterL.addAction(DetectorConstants.ACTION_LOCATION_DETECTED);
+
+        filterM = new IntentFilter();
+        filterM.addAction(DetectorConstants.ACTION_MOTION_DETECTED);
+
+        receiverP = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                    mPeople = 0;
-                    //discovery starts, we can show progress dialog or perform other tasks
-                    Log.i(TAG, "Bluetooth discovery started.");
-                } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                    //devicesFound = 0;//
-                    unregisterReceiver(mReceiver);
-                    Log.i(TAG, "Bluetooth discovery ended. Found "+mPeople+" devices.");
-                    mBTErrMsg = "";
-
-
-                    //btServiceResponse(Constants.SUCCESS_RESULT,errMsg,devicesFound);
-                } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                    //bluetooth device found
-                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    Log.i(TAG, "Device found: " + device.getName() + "; MAC " + device.getAddress());
-                    mPeople++;
+                if(intent.getAction().equals(DetectorConstants.ACTION_PEOPLE_DETECTED)) {
+                    int detectedPeople = intent.getIntExtra(DetectorConstants.EXTRA_PEOPLE,0);
+                    Log.i("PEOPLE DETECTION","Detected people: " + detectedPeople);
+                    viewModel.onPeopleDetected(detectedPeople);
                 }
             }
         };
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        registerReceiver(mReceiver,filter);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mBluetoothAdapter.startDiscovery();*/
+        receiverS = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch(intent.getAction()) {
+                    case DetectorConstants.ACTION_SONG_DETECTED:
+                        String detectedSong = intent.getStringExtra(DetectorConstants.EXTRA_SONG);
+                        Log.i("SONG DETECTION", "Song detected: " + detectedSong);
+                        viewModel.onSongDetected(detectedSong);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        receiverL = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch(intent.getAction()) {
+                    case DetectorConstants.ACTION_LOCATION_DETECTED:
+                        String detectedLocation = intent.getStringExtra(DetectorConstants.EXTRA_LOCATION);
+                        Log.i("LOCATION DETECTION", "Location detected:" + detectedLocation);
+                        viewModel.onLocationDetected(detectedLocation);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        receiverM = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch(intent.getAction()) {
+                    case DetectorConstants.ACTION_MOTION_DETECTED:
+                        String detectedMovement = intent.getStringExtra(DetectorConstants.EXTRA_ACTIVITY);
+                        Log.i("MOVEMENT DETECTION: ","Detected movement:" + detectedMovement);
+                        removeActivityUpdatesButtonHandler();
+                        viewModel.onMotionDetected(detectedMovement);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        registerDetectionReceivers();
+        //registerReceiver(receiverM,filterM);
+        Intent intent = new Intent(MainActivity.this, SongDetectorService.class);
+        startService(intent);
+
+        Intent intentP = new Intent(MainActivity.this, PeopleDetectorService.class);
+        startService(intentP);
+
+        //location detection
+        if(mLocationDetector == null) {
+            mLocationDetector = new LocationDetector();
+        }
+        mLocationDetector.startLocationDetection(this);
+
+        mActivityRecognitionClient = new ActivityRecognitionClient(this);
+        Intent intentM = new Intent(MainActivity.this, DetectedActivitiesIntentService.class);
+        PendingIntent pintent =  PendingIntent.getService(MainActivity.this, 0, intentM, PendingIntent.FLAG_UPDATE_CURRENT);
+        requestActivityUpdatesButtonHandler(pintent);
     }
 
-    @Override
-    public void startLocationDetection() {
-        setUpLocationRequest();
-        //check settings
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        mLocationSettingsRequest = builder.build();
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
+    public void requestActivityUpdatesButtonHandler(PendingIntent intent) {
+        Task<Void> task = mActivityRecognitionClient.requestActivityUpdates(
+                DETECTION_INTERVAL_IN_MILLISECONDS,
+                intent);
 
-        mLocationCallback = new LocationCallback() {
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                mLastKnownLocation = locationResult.getLastLocation();
-                if(mLastKnownLocation != null) {
-                    masterDetectorService.getAddress(mLastKnownLocation);
-                }
-            }
-        };
-
-        //check location settings
-        SettingsClient client = LocationServices.getSettingsClient(MainActivity.this);
-        checkLocationSettingsTask = client.checkLocationSettings(mLocationSettingsRequest);
-        checkLocationSettingsTask.addOnSuccessListener(MainActivity.this, new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                //preverim permission in zahtevam location update
-                startLocationUpdate();
+            public void onSuccess(Void result) {
+                Toast.makeText(MainActivity.this,
+                        "UPDATES ENABLED",
+                        Toast.LENGTH_SHORT)
+                        .show();
             }
         });
-        checkLocationSettingsTask.addOnFailureListener(MainActivity.this, new OnFailureListener() {
-            //ce niso nastavitve OK pogledam če je kej kar loh uporabnik poprav.
+    }
+    public void removeActivityUpdatesButtonHandler() {
+        Task<Void> task = mActivityRecognitionClient.removeActivityUpdates(
+                getActivityDetectionPendingIntent());
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                Toast.makeText(MainActivity.this,
+                        "UPDATES REMOVED",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        task.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    try {
-                        ResolvableApiException resolvable = (ResolvableApiException) e;
-                        resolvable.startResolutionForResult(MainActivity.this, REQUEST_CHECK_SETTINGS);
-                    } catch (IntentSender.SendIntentException sendEx) {
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putBoolean("location", false);
-                        editor.apply();
-                    }
-                }
+                Log.w("Activity recognition", "Failed to enable activity recognition.");
+                Toast.makeText(MainActivity.this, "updates not removed",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private PendingIntent getActivityDetectionPendingIntent() {
+        Intent intent = new Intent(MainActivity.this, DetectedActivitiesIntentService.class);
+        return PendingIntent.getService(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
     @Override
-    public void startLocationUpdate() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+    public String getUserActivity() {
+        UserActivity ua = new UserActivity();
+        //User lojze is in Ljubljana,
+        //walking and listening to enya
+        //with 2 other people.
+        boolean location = !ua.getUaLocation().isEmpty();
+        boolean movement = !ua.getUaMovement().isEmpty();
+        boolean music = !ua.getUaMusic().isEmpty();
+        boolean people = ua.getUaPeople() != 0;
+
+        String mPost = "User " + getUser().getUsername() + " is in " + ua.getUaLocation() +
+                ", hanging out and listening to " + ua.getUaMusic() + " with " + ua.getUaPeople()
+                + " other people.";
+ /*       String mPost = "User " + getUser().getUsername();
+        mPost += " is ";
+        if(location) {
+            mPost += " in " + ua.getUaLocation() + ", ";
+        }
+        if(movement) {
+            mPost += ua.getUaMovement();
+        } else {
+            mPost += "hanging out";
+        }
+        if(music) {
+            mPost += " and listening to " + ua.getUaMusic();
+        }
+        if(people) {
+            mPost += " with " + ua.getUaPeople() + " other people";
+        }
+        mPost += ".";
+*/
+        return mPost;
+
+        //String tPost = "User "+getUser().getUsername()+
+        //        " is "+ua.getUaMovement()+" at "+ua.getUaLocation()
+        //        + " with "+ua.getUaPeople()+" other people.";
+//        String tPost = "User " + getUser().getUsername();
+//        if(!ua.getUaMovement().isEmpty()) {
+//            tPost += " is " + ua.getUaMovement();
+//        } else {
+//            tPost += " is hanging";
+//        }
+//        if(!ua.getUaLocation().isEmpty()) {
+//            tPost += " at " + ua.getUaLocation();
+//        }
+//        if(ua.getUaPeople() != 0) {
+//            tPost += " with " + ua.getUaPeople() + " other people";
+//        }
+//        if(!ua.getUaMusic().isEmpty()) {
+//            tPost += " while listening to " + ua.getUaMusic() + ".";
+//        } else {
+//            tPost += ".";
+//        }
+    }
+
+    @Override
+    public void activityDetectedDialog(String title, final String post) {
+        unregisterDetectionReceivers();
+        detectionInprogress = false;
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);//new AlertDialog.Builder(new ContextThemeWrapper(loginActivity, R.style.Drowner));
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setMessage(getUser().getUsername()+" \n"+post);
+        alertDialogBuilder.setPositiveButton("POST", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Post p = new Post(getUser().getUserID(), getUser().getUsername(), post);
+                dialog.dismiss();
+                viewModel.postDetectedActivity(p);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialogBuilder.show();
+    }
+
+    public void registerDetectionReceivers() {
+        pref = (pref == null) ? PreferenceManager.getDefaultSharedPreferences(this) : pref;
+        if(detectionInprogress) {
+            if(pref.getBoolean("music",true) && !isFSregistered) {
+                if(receiverS != null && filterS != null) {
+                    registerReceiver(receiverS,filterS);
+                    isFSregistered = true;
+                }
+            }
+            if(pref.getBoolean("blueTooth",true) && !isFPregistered) {
+                if(receiverP != null && filterP != null) {
+                    registerReceiver(receiverP,filterP);
+                    isFPregistered = true;
+                }
+            }
+            if(pref.getBoolean("location",true) && !isFLregistered) {
+                if(receiverL != null && filterL != null) {
+                    registerReceiver(receiverL, filterL);
+                    isFLregistered = true;
+                }
+            }
+          //  if(pref.getBoolean("motion",true) && !isFMregistered) {
+            //    if(receiverM != null && filterM != null) {
+                    registerReceiver(receiverM, filterM);
+                    isFMregistered = true;
+              //  }
+            //}
         }
     }
-
-    @Override
-    public void stopLocationUpdate() {
-        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-    }
-
-    @Override
-    public void setUpLocationRequest(){
-        this.mLocationRequest = new LocationRequest();
-        this.mLocationRequest.setInterval(UPDATE_INTERVAL);
-        this.mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        this.mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    @Override
-    public Location getLastKnownLocation() {
-        return this.mLastKnownLocation;
-    }
-}
-
-/*
-import android.Manifest;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.example.rosa.diplomska.R;
-import com.example.rosa.diplomska.model.Entity.User;
-import com.example.rosa.diplomska.databinding.ActivityMainBinding;
-import com.example.rosa.diplomska.navigator.MainNavigator;
-import com.example.rosa.diplomska.view.fragment.AboutFragment;
-import com.example.rosa.diplomska.view.fragment.HomeFragment;
-import com.example.rosa.diplomska.view.fragment.ProfileFragment;
-import com.example.rosa.diplomska.view.fragment.SettingsFragment;
-import com.example.rosa.diplomska.viewModel.HomeViewModel;
-import com.example.rosa.diplomska.viewModel.MainActivityViewModel;
-
-import java.util.Observable;
-import java.util.Observer;
-
-public class MainActivity extends AppCompatActivity implements Observer {
-    FragmentManager fm;
-
-    //nav
-    DrawerLayout drawerLayout;
-    NavigationView navView;
-
-    //fab
-    FloatingActionButton floatingActionButton;
-
-    //detect activity
-    Context context;
-    Dialog dialog;
-    TextView cancelDialog;
-    TextView confirmDialog;
-
-    private ActivityMainBinding binding;
-    MainActivityViewModel viewModel;
-    MainNavigator mainNavigator;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        //change theme
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String theme = pref.getString("appTheme", "1");
-        if (theme.equals("1")) {
-            setTheme(R.style.Drowner);
-        } else if (theme.equals("2")) {
-            setTheme(R.style.VineLight);
-        }
-
-        //databinding
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        //brez data binding
-        //setContentView(R.layout.activity_main);
-
-        User user = new User(pref.getInt("userId",-1),pref.getString("username",""),pref.getString("email",""),pref.getString("description",""));
-        binding.setUser(user);
-
-        fm = getSupportFragmentManager();
-        drawerLayout = binding.drawerLayout;//(DrawerLayout) findViewById(R.id.drawer_layout);
-        mainNavigator = new MainNavigator(this, fm, binding, drawerLayout);
-        viewModel = new MainActivityViewModel(mainNavigator);
-        binding.setMainViewModel(viewModel);
-        super.onCreate(savedInstanceState);
-
-        //dialog
-        context = this;
-        dialog = new Dialog(context);
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setTitle("Detect activity");
-        dialog.setContentView(R.layout.fragment_detect_activity_dialog);
-        cancelDialog = (TextView) dialog.findViewById(R.id.btnCancelDialog);
-        //cancelDialog.setOnClickListener(viewModel);
-        confirmDialog = (TextView) dialog.findViewById(R.id.btnConfirmDialog);
-        //confirmDialog.setOnClickListener(viewModel);
-
-        Toolbar myToolbar = binding.myToolbar;//(Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        //myToolbar.setSubtitle("Test Subtitle");
-        myToolbar.inflateMenu(R.menu.menu);
-        myToolbar.setNavigationIcon(R.drawable.ic_menu);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
-            Drawable menuIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_menu, null);
-            actionBar.setHomeAsUpIndicator(menuIcon);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            setSupportActionBar(myToolbar);
-        }
-
-        navView = binding.navigationView;//(NavigationView) findViewById(R.id.navigation_view);//binding.navigationView;
-        navView.setNavigationItemSelectedListener(mainNavigator);
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-
-        if (findViewById(R.id.container_main) != null) {
-            if(savedInstanceState == null) {
-                mainNavigator.setUpMainActivity();
-            } else {
-                Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_main);
-                if (f instanceof HomeFragment)
-                    getSupportActionBar().setTitle(R.string.menu_home);
-                if (f instanceof AboutFragment)
-                    getSupportActionBar().setTitle(R.string.menu_about);
-                if (f instanceof ProfileFragment)
-                    getSupportActionBar().setTitle(R.string.menu_profile);
-                if (f instanceof SettingsFragment)
-                    getSupportActionBar().setTitle(R.string.menu_settings);
+    public void unregisterDetectionReceivers() {
+        if(detectionInprogress) {
+            if(isFSregistered && receiverS != null) {
+                unregisterReceiver(receiverS);
+                isFSregistered = false;
+            }
+            if(isFLregistered && receiverL != null) {
+                unregisterReceiver(receiverL);
+                isFLregistered = false;
+            }
+            if(isFMregistered && receiverM != null) {
+                unregisterReceiver(receiverM);
+                isFMregistered = false;
+            }
+            if(isFPregistered && receiverP != null) {
+                unregisterReceiver(receiverP);
+                isFPregistered = false;
             }
         }
-        //fab
-        //floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        //floatingActionButton.setOnClickListener(this);
-        //binding.fab.setOnClickListener(viewModel);
     }
-
-    public ActivityMainBinding getMainActivityBinding() {
-        return this.binding;
-    }
-
-    public Dialog getDialog(){
-        return this.dialog;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-    }
-
-    public User getLogedUser() {
-        return binding.getUser();
-    }
-
-    private Boolean checkPermission(){
-        int gps = ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION);
-        int bt = ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.BLUETOOTH);
-        int mic = ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.RECORD_AUDIO);
-        int mov = ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.BODY_SENSORS);
-
-        if (gps == PackageManager.PERMISSION_GRANTED) {
-
-        }
-
-        return true;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-}*/
+}

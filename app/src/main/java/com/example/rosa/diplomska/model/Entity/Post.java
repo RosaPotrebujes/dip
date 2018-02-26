@@ -76,6 +76,15 @@ public class Post extends BaseObservable {
     }
 
     @Ignore
+    public Post(int userId, String username, String content) {
+        this.posterId = userId;
+        this.posterUsername = username;
+        this.content = content;
+        this.timestamp = new Timestamp(System.currentTimeMillis());
+        this.favouriteCounter = 0;
+    }
+
+    @Ignore
     public Post(String username, String content, Timestamp timestamp) {
         this.posterUsername = username;
         this.content = content;

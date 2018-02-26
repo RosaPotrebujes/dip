@@ -1,18 +1,24 @@
 package com.example.rosa.diplomska.viewModel;
 
 import android.arch.lifecycle.ViewModel;
+import android.arch.persistence.room.Ignore;
 
+import com.example.rosa.diplomska.detector.LocationDetector;
 import com.example.rosa.diplomska.detector.MasterDetector;
+import com.example.rosa.diplomska.detector.UserActivity;
+import com.example.rosa.diplomska.model.Entity.Post;
 import com.example.rosa.diplomska.model.Entity.User;
 import com.example.rosa.diplomska.navigator.MainNavigator;
 import com.example.rosa.diplomska.view.fragment.AddFriendDialogFragment;
 import com.example.rosa.diplomska.volley.DataProvider;
 
-public class MainActivityViewModel extends ViewModel {
-    MainNavigator navigator;
-    DataProvider dp;
-    AddFriendDialogFragment df;
-    MasterDetector masterDetector;
+public class MainActivityViewModel extends ViewModel implements
+        LocationDetector.OnLocationDetectedListener, UserActivity.OnActvityDoneListener {
+    private MainNavigator navigator;
+    private DataProvider dp;
+    private AddFriendDialogFragment df;
+    private MasterDetector masterDetector;
+    private UserActivity mUserActivity;
 
     public MainActivityViewModel(MainNavigator navigator) {
         this.navigator = navigator;
@@ -35,31 +41,80 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void getUserPosts() {
-        dp.getUserPosts();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.getUserPosts();
+            }
+        });
+        thread.start();
+        //dp.getUserPosts();
     }
 
     public void getHomePosts() {
-        dp.getHomePosts();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.getHomePosts();
+            }
+        });
+        thread.start();
+        //dp.getHomePosts();
     }
 
     public void getUserFriends() {
-        dp.loadUserFriends();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.loadUserFriends();
+            }
+        });
+        thread.start();
+        //dp.loadUserFriends();
     }
 
-    public void friendRequestAccepted(User friend) {
-        dp.acceptFriendRequest(friend);
+    public void friendRequestAccepted(final User friend) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.acceptFriendRequest(friend);
+            }
+        });
+        thread.start();
+        //dp.acceptFriendRequest(friend);
     }
 
-    public void friendRequestDeclined(User friend) {
-        dp.declineFriendRequest(friend);
+    public void friendRequestDeclined(final User friend) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.declineFriendRequest(friend);
+            }
+        });
+        thread.start();
+        //dp.declineFriendRequest(friend);
     }
 
-    public void deleteFriend(User friend) {
-        dp.deleteFriend(friend);
+    public void deleteFriend(final User friend) {
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.deleteFriend(friend);
+            }
+        });
+        thread.start();
+        //dp.deleteFriend(friend);
     }
 
     public void getUserPendingFriends() {
-        dp.loadUserPendingFriends();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                dp.loadUserPendingFriends();
+            }
+        });
+        thread.start();
+        //dp.loadUserPendingFriends();
     }
 
     public void onButtonAddFriendClick() {
@@ -87,5 +142,58 @@ public class MainActivityViewModel extends ViewModel {
 
     public void onFabClick() {
         masterDetector.startDetection();
+    }
+
+    public void setUserActivity(UserActivity ua) {
+        this.mUserActivity = ua;
+    }
+    //poslušamo za zaznano pesem
+
+    public void onSongDetected(String song) {
+        if(mUserActivity != null) {
+            mUserActivity.setUaMusic(song);
+            mUserActivity.setGotMusic(true);
+        }
+        //navigator.mnAlertDialog("Got a song!",song);
+    }
+
+    public void onLocationDetected(String location) {
+        if(mUserActivity != null) {
+            mUserActivity.setUaLocation(location);
+            mUserActivity.setGotLocation(true);
+        }
+        //navigator.mnAlertDialog("Got a song!",location);
+    }
+
+    public void onPeopleDetected(int people) {
+        if(mUserActivity != null) {
+            mUserActivity.setUaPeople(people);
+            mUserActivity.setGotPeople(true);
+        }
+        //navigator.mnAlertDialog("Number of people",Integer.toString(people));
+    }
+
+    public void onMotionDetected(String motion) {
+        if(mUserActivity != null) {
+            mUserActivity.setUaMovement(motion);
+            mUserActivity.setGotMovement(true);
+        }
+    }
+    @Override
+    public void onActivityDone() {
+        String mPost = "is in " + mUserActivity.getUaLocation()
+                + ", " + mUserActivity.getUaMovement() +
+                " and listening to \"" +
+                mUserActivity.getUaMusic() + "\" with " +
+                mUserActivity.getUaPeople() + " other people.";
+        //String mPost = "User " + mUserActivity.getUaUsername() + " \nis in " +
+        //        mUserActivity.getUaLocation() + ", \nhanging out \nand listening to \n\"" +
+        //        mUserActivity.getUaMusic() + "\" \nwith " + mUserActivity.getUaPeople()
+        //        + " other people.";
+        masterDetector.activityDetectedDialog("Activity detected",mPost);
+    }
+    public void postDetectedActivity(Post post) {
+        navigator.getProfileFragment().addUserPost(post);
+        dp.insertUserPost(post);
     }
 }

@@ -41,9 +41,9 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:id="@+id/textView" />
+                    android:id="@+id/nav_header_username" />
                 <TextView
-                    android:id="@+id/email"
+                    android:id="@+id/nav_header_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{user.email}"
