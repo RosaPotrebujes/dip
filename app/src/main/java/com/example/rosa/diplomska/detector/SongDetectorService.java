@@ -1,6 +1,7 @@
 package com.example.rosa.diplomska.detector;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
@@ -32,7 +33,7 @@ import java.util.Map;
 import static com.example.rosa.diplomska.detector.DetectedActivitiesIntentService.TAG;
 
 public class SongDetectorService extends Service {
-    private final String detectAudioUrl = "http://192.168.0.102/ada_login_api/Source_Files/audioDetect.php";
+    private final String detectAudioUrl = "http://192.168.1.119/ada_login_api/Source_Files/audioDetect.php";
     private MediaRecorder mRecorder;
     private String mAudioFileName = "";
     private String mAudioSavePathInDevice = null;
@@ -41,6 +42,7 @@ public class SongDetectorService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG,"Song detection started.");
         mAudioFileName = Long.toString(System.currentTimeMillis());
         mAudioSavePathInDevice = this.getFilesDir().getPath() + "/" + mAudioFileName + ".m4a";
 
@@ -62,7 +64,6 @@ public class SongDetectorService extends Service {
     }
 
     public void startRecording() {
-        Log.i(TAG,"Song detection started.");
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         if(pref.getBoolean("music",true)) {
@@ -166,6 +167,16 @@ public class SongDetectorService extends Service {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         appSingleton.addToRequestQueue(detectAudioRequest,tag);
+
+        try{
+            if(f.delete()){
+                Log.i(TAG,"File "+f.getName()+" deleted");
+            }else{
+                Log.i(TAG,"Delete operation failed.");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public byte[] fileToBytes(File f) {

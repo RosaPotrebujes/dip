@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.design.widget.CoordinatorLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/coordinator_main">
@@ -62,6 +63,7 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="@dimen/fab_right_bottom_margin"
                     android:layout_marginRight="@dimen/fab_right_bottom_margin"
+                    android:onClick="@{(v)->mainViewModel.onFabClick()}"
                     app:elevation="10dp"
                     app:fabSize="normal"
                     app:pressedTranslationZ="12dp" />

@@ -27,9 +27,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.rosa.diplomska.R;
@@ -40,6 +38,7 @@ import com.example.rosa.diplomska.detector.LocationDetector;
 import com.example.rosa.diplomska.detector.MasterDetector;
 import com.example.rosa.diplomska.detector.PeopleDetectorService;
 import com.example.rosa.diplomska.detector.SongDetectorService;
+import com.example.rosa.diplomska.detector.DetectionReceiver;
 import com.example.rosa.diplomska.detector.UserActivity;
 import com.example.rosa.diplomska.model.Entity.Post;
 import com.example.rosa.diplomska.model.Entity.User;
@@ -60,9 +59,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
+import java.util.ArrayList;
 
-import static android.Manifest.permission.RECORD_AUDIO;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity implements MainNavigator,
         NavigationView.OnNavigationItemSelectedListener, MasterDetector {
@@ -80,30 +78,91 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     FragmentManager fm;
     AddFriendDialogFragment df;
 
+    //za alert dialog, da ne zjebe usega orientacija
+    AlertDialog mNavAlertDialog;
+    String mNavAlertDialogTitle;
+    String mNavAlertDialogMessage;
+    boolean wasNavDialogDismissed;
     //detect activity
+    boolean wasDismissed;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog mAlertDialog;
+    String mDialogPost;
+
     LocationDetector mLocationDetector;
-    BroadcastReceiver receiverS;
-    BroadcastReceiver receiverP;
-    BroadcastReceiver receiverL;
-    BroadcastReceiver receiverM;
+
+    DetectionReceiver receiverS = new DetectionReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch(intent.getAction()) {
+                case DetectorConstants.ACTION_SONG_DETECTED:
+                    String detectedSong = intent.getStringExtra(DetectorConstants.EXTRA_SONG);
+                    //Log.i("SONG DETECTION", "Song detected: " + detectedSong);
+                    viewModel.onSongDetected(detectedSong);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    DetectionReceiver receiverP = new DetectionReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(DetectorConstants.ACTION_PEOPLE_DETECTED)) {
+                int detectedPeople = intent.getIntExtra(DetectorConstants.EXTRA_PEOPLE,0);
+                //Log.i("PEOPLE DETECTION","Detected people: " + detectedPeople);
+                stopService(intentP);
+                viewModel.onPeopleDetected(detectedPeople);
+            } else if (intent.getAction().equals(DetectorConstants.ACTION_BT_NOT_ENABLED)) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT);
+            }
+        }
+    };
+    DetectionReceiver receiverL = new DetectionReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch(intent.getAction()) {
+                case DetectorConstants.ACTION_LOCATION_DETECTED:
+                    String detectedLocation = intent.getStringExtra(DetectorConstants.EXTRA_LOCATION);
+                    //Log.i("LOCATION DETECTION", "Location detected:" + detectedLocation);
+                    viewModel.onLocationDetected(detectedLocation);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    DetectionReceiver receiverM = new DetectionReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch(intent.getAction()) {
+                case DetectorConstants.ACTION_MOTION_DETECTED:
+                    String detectedMovement = intent.getStringExtra(DetectorConstants.EXTRA_ACTIVITY);
+                    //Log.i("MOVEMENT DETECTION: ","Detected movement:" + detectedMovement);
+                    removeActivityUpdatesButtonHandler();
+                    viewModel.onMotionDetected(detectedMovement);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     IntentFilter filterS;
     IntentFilter filterP;
     IntentFilter filterL;
     IntentFilter filterM;
+    Intent intentP;
 
-    private boolean isFSregistered = false;
-    private boolean isFPregistered = false;
-    private boolean isFLregistered = false;
-    private boolean isFMregistered = false;
-
-    private boolean detectionInprogress = false;
-
+    private boolean detectionInprogress;
+    UserActivity ua;
     //permissions
     private final static int REQUEST_ENABLE_BT = 1;
     private final static int REQUEST_LOCATION = 2;
     private final static int REQUEST_CHECK_SETTINGS = 3;
     private final static int REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO = 4;
+    private final static int REQUEST_ALL_PERMISSIONS = 666;
 
     private BluetoothAdapter mBluetoothAdapter;
 
@@ -131,6 +190,10 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
         fm = getSupportFragmentManager();
 
         viewModel = new MainActivityViewModel(navigator,masterDetector);
+        //viewModel.setUser(user);
+        viewModel.getUserPosts();
+        viewModel.getUserFriends();
+        viewModel.getUserPendingFriends();
         binding.setMainViewModel(viewModel);
         super.onCreate(savedInstanceState);
 
@@ -148,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
 
         binding.navigationView.setNavigationItemSelectedListener(this);
 
-
         //HeaderBinding navBinding = HeaderBinding.inflate(LayoutInflater.from(binding.navigationView.getContext()));
         //navBinding.setUser(user);
         //navBinding.navHeaderUsername.setText("usernaimu");
@@ -158,13 +220,53 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
         binding.navigationView.addHeaderView(b.getRoot());
         b.setUser(user);
 
-
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
         if (findViewById(R.id.container_main) != null) {
             if(savedInstanceState == null) {
                 navigator.setUpMainActivity();
+                wasDismissed = true;
+                wasNavDialogDismissed = true;
+                mDialogPost = "";
+                detectionInprogress = false;
             } else {
+                detectionInprogress = savedInstanceState.getBoolean("detectionInProgress");
+                if(detectionInprogress) {
+                    ua = new UserActivity();
+                    ua.setGotMovement(savedInstanceState.getBoolean("gotMotion"));
+                    ua.setGotMusic(savedInstanceState.getBoolean("gotMusic"));
+                    ua.setGotLocation(savedInstanceState.getBoolean("gotLocation"));
+                    ua.setGotPeople(savedInstanceState.getBoolean("gotBlueTooth"));
+                    ua.setUaUsername(savedInstanceState.getString("uaUsername"));
+
+                    ua.setOnActivityDoneListener(viewModel);
+                    viewModel.setUserActivity(ua);
+
+                    if(ua.getGotMovement()) {
+                        viewModel.onMotionDetected(savedInstanceState.getString("uaMotion"));
+                    }
+                    if(ua.getGotMusic()) {
+                        viewModel.onSongDetected(savedInstanceState.getString("uaMusic"));
+                    }
+                    if(ua.getGotPeople()) {
+                        viewModel.onPeopleDetected(savedInstanceState.getInt("uaPeople"));
+                    }
+                    if(ua.getGotLocation()) {
+                        viewModel.onLocationDetected(savedInstanceState.getString("uaLocation"));
+                    }
+                }
+                wasDismissed = savedInstanceState.getBoolean("wasDismissed");
+                mDialogPost = savedInstanceState.getString("dialogPost");
+                if(!wasDismissed){
+                    activityDetectedDialog("Activity detected",mDialogPost);
+                }
+                wasNavDialogDismissed = savedInstanceState.getBoolean("wasNavDialogDismissed");
+                if(!wasNavDialogDismissed) {
+                    mNavAlertDialogTitle = savedInstanceState.getString("mNavAlertDialogTitle");
+                    mNavAlertDialogMessage = savedInstanceState.getString("mNavAlertDialogMessage");
+                    mnAlertDialog(mNavAlertDialogTitle,mNavAlertDialogMessage);
+                }
+
                 Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_main);
                 if (f instanceof HomeFragment)
                     getSupportActionBar().setTitle(R.string.menu_home);
@@ -176,6 +278,16 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
                     getSupportActionBar().setTitle(R.string.menu_settings);
             }
         }
+        //filtri za detection
+        filterL = new IntentFilter();
+        filterL.addAction(DetectorConstants.ACTION_LOCATION_DETECTED);
+        filterS = new IntentFilter();
+        filterS.addAction(DetectorConstants.ACTION_SONG_DETECTED);
+        filterM = new IntentFilter();
+        filterM.addAction(DetectorConstants.ACTION_MOTION_DETECTED);
+        filterP = new IntentFilter();
+        filterP.addAction(DetectorConstants.ACTION_PEOPLE_DETECTED);
+        filterP.addAction(DetectorConstants.ACTION_BT_NOT_ENABLED);
     }
 
     @Override
@@ -219,12 +331,14 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     }
     @Override
     public void onDestroy(){
-        unregisterDetectionReceivers();
         super.onDestroy();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
     @Override
     public void onPause() {
+        if(mAlertDialog != null) {
+            mAlertDialog.dismiss();
+        }
         unregisterDetectionReceivers();
         super.onPause();
     }
@@ -350,7 +464,10 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
                 dialog.dismiss();
             }
         });
-        alertDialogBuilder.show();
+        mNavAlertDialog = alertDialogBuilder.show();
+        mNavAlertDialogTitle = title;
+        mNavAlertDialogMessage = message;
+
     }
     @Override
     public HomeFragment getHomeFragment() {
@@ -380,9 +497,10 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     }
     @Override
     public User getUser(){
+        if (binding.getUser() != null)
+            return binding.getUser();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         User user = new User(pref.getInt("userId",-1),pref.getString("username",""),pref.getString("email",""),pref.getString("description",""));
-
         return user;
     }
     @Override
@@ -424,62 +542,159 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
             if(resultCode == MainActivity.RESULT_OK){
                 //je prizgal bt
                 editor.putBoolean("blueTooth", true);
+                if(detectionInprogress) {
+                    //receiverP.register(this,filterP);
+                    startPeopleDetection();
+                }
             }
             else {//if (resultCode == MainActivity.RESULT_CANCELED) {
                 //uporabnik/ca je partypoop
                 editor.putBoolean("blueTooth", false);
+                if(detectionInprogress)
+                    Log.i("BT NOT ENABLED","");
+                    viewModel.onPeopleDetected(0);
             }
         }
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             if(resultCode == MainActivity.RESULT_OK) {
                 editor.putBoolean("location",true);
+                mLocationDetector.getLocationResolutionCallback().onResolutionResult(true);
             } else {
+                viewModel.onLocationDetected("");
                 editor.putBoolean("location",false);
+                //mLocationDetector.getLocationResolutionCallback().onResolutionResult(false);
             }
         }
         editor.apply();
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        boolean requestAll = false;
+        boolean rA = false;
+        boolean wES = false;
+        if(pref == null) {
+            pref = PreferenceManager.getDefaultSharedPreferences(this);
+        }
+        SharedPreferences.Editor editor = pref.edit();
         switch (requestCode) {
-            case REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean("location",true);
-                    editor.apply();
-                } else {
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean("location",false);
-                    editor.apply();
-                }
-                return;
-            }
-            case REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO: {
-                if (grantResults.length > 0) {
-                    boolean StoragePermission = grantResults[0] ==
-                            PackageManager.PERMISSION_GRANTED;
-                    boolean RecordPermission = grantResults[1] ==
-                            PackageManager.PERMISSION_GRANTED;
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    SharedPreferences.Editor editor = pref.edit();
+            case REQUEST_ALL_PERMISSIONS: {
+                requestAll = true;
+                //boolean bt = false;
+                //boolean btA = false;
 
-                    if (StoragePermission && RecordPermission) {
-                        editor.putBoolean("music",true);
-                    } else {
-                        editor.putBoolean("music",false);
+                for(int i = 0; i < permissions.length; i++) {
+                    switch (permissions[i]) {
+                        case Manifest.permission.ACCESS_FINE_LOCATION:
+                            if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                                editor.putBoolean("location",true);
+                                startLocationDetection();
+                            } else {
+                                editor.putBoolean("location",false);
+                                viewModel.onLocationDetected("");
+                            }
+                            break;
+                        case Manifest.permission.WRITE_EXTERNAL_STORAGE:
+                            if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                                wES = true;
+                            } else {
+                                wES = false;
+                            }
+                            break;
+                        case Manifest.permission.RECORD_AUDIO:
+                            if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                                rA = true;
+                            } else {
+                                rA = false;
+                            }
+                            break;
+                        //case Manifest.permission.BLUETOOTH:
+                        //    if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        //        bt = true;
+                        //        if(btA) {
+                        //            editor.putBoolean("blueTooth",true);
+                        //        }
+                        //    } else {
+                        //        bt = false;
+                        //    }
+                        //    break;
+                        //case Manifest.permission.BLUETOOTH_ADMIN:
+                        //    if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        //        btA = true;
+                        //        if(bt) {
+                        //            editor.putBoolean("blueTooth",true);
+                        //        }
+                        //    } else {
+                        //        btA = false;
+                        //    }
+                        //    break;
                     }
-                    editor.apply();
+                    //Log.i("PERMISSIONS","request: "+permissions[i]+" result: "+grantResults[i]);
+                    //if(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    //    Log.i("PERMISSIONS", "granted");
+                    //}
                 }
+                editor.apply();
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request.
+            default:
+                break;
+        }
+        if(requestAll) {
+            if(!rA || !wES)
+                viewModel.onSongDetected("");
+            else if (rA && wES) {
+                editor.putBoolean("music", true);
+                startSongDetection();
+            }
         }
     }
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putBoolean("detectionInProgress",detectionInprogress);
+        if(detectionInprogress) {
+            bundle.putBoolean("gotMusic",ua.getGotMusic());
+            if(ua.getGotMusic()) {
+                bundle.putString("uaMusic",ua.getUaMusic());
+            } else {
+                bundle.putString("uaMusic","");
+            }
+            bundle.putBoolean("gotLocation",ua.getGotLocation());
+            if(ua.getGotLocation()) {
+                bundle.putString("uaLocation",ua.getUaLocation());
+            } else {
+                bundle.putString("uaLocation","");
+            }
+            bundle.putBoolean("gotMotion",ua.getGotMovement());
+            if(ua.getGotMovement()) {
+                bundle.putString("uaMotion",ua.getUaMovement());
+            } else {
+                bundle.putString("uaMotion","");
+            }
+            bundle.putBoolean("gotBlueTooth",ua.getGotPeople());
+            if(ua.getGotPeople()) {
+                bundle.putInt("uaPeople",ua.getUaPeople());
+            } else {
+                bundle.putInt("uaPeople",0);
+            }
+            bundle.putString("uaUsername",getUser().getUsername());
+        }
+
+
+        bundle.putBoolean("wasDismissed",wasDismissed);
+        if(wasDismissed)
+            bundle.putString("post","");
+        else
+            bundle.putString("dialogPost", mDialogPost);
+        bundle.putBoolean("wasNavDialogDismissed",wasNavDialogDismissed);
+        if(wasNavDialogDismissed) {//za usak slučaj
+            bundle.putString("mNavAlertDialogTitle","");
+            bundle.putString("mNavAlertDialogMessage","");
+        } else {
+            bundle.putString("mNavAlertDialogTitle",mNavAlertDialogTitle);
+            bundle.putString("mNavAlertDialogMessage",mNavAlertDialogMessage);
+        }
+    }
+
 
     @Override
     public boolean checkIfBTSupported() {
@@ -516,54 +731,105 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
 
     @Override
     public void askPermissions() {
-        //bluetooth
-        if(pref.getBoolean("blueTooth",true)) {
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            //prosim da prizge bluetooth
-            if(!mBluetoothAdapter.isEnabled()){
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT);
-            }
+        if(pref == null) {
+            pref = PreferenceManager.getDefaultSharedPreferences(this);
         }
-        if(pref.getBoolean("location", true)) {
+        SharedPreferences.Editor editor = pref.edit();
+        ArrayList<String> permissionsNeeded = new ArrayList<>();
+        //bluetooth permissions se dobijo avtomatsko
+        //if (pref.getBoolean("blueTooth",false)) {
+        //    if(ActivityCompat.checkSelfPermission(MainActivity.this,
+        //            Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED &&
+        //            ActivityCompat.checkSelfPermission(MainActivity.this,
+        //                    Manifest.permission.BLUETOOTH_ADMIN) !=
+        //            PackageManager.PERMISSION_GRANTED) {
+        //        permissionsNeeded.add(Manifest.permission.BLUETOOTH);
+        //        permissionsNeeded.add(Manifest.permission.BLUETOOTH_ADMIN);
+        //    } else {
+        //        editor.putBoolean("blueTooth",true);
+        //        //mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                ////prosim da prizge bluetooth
+                //if(!mBluetoothAdapter.isEnabled()){
+                //    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                //    startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT);
+                //}
+        //    }
+        //}
+
+        //ni nevarna pravica
+        //if(pref.getBoolean("blueToothSensor",false))
+            //if(!BluetoothAdapter.getDefaultAdapter().isEnabled()){
+               // Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+               // startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT);
+            //} else {
+          //      editor.putBoolean("blueTooth", true);
+            //}
+        //"com.google.android.gms.permission.ACTIVITY_RECOGNITION" izgleda ni dangerous
+       // if(pref.getBoolean("motionSensor",false))
+        //    editor.putBoolean("motion",true);
+
+        if(pref.getBoolean("locationSensor",false)) {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+                permissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            } else {
+                editor.putBoolean("location",true);
             }
         }
-        if(pref.getBoolean("music",true)) {
-            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO)
+
+        if (pref.getBoolean("musicSensor", false)) {
+            boolean wES = false;
+            boolean rA = false;
+            if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new
-                        String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, REQUEST_EXTERNAL_STORAGE_AND_RECORD_AUDIO);
+                permissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            } else {
+                wES = true;
             }
+            if(ActivityCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.RECORD_AUDIO)
+                            != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.RECORD_AUDIO);
+            } else {
+                rA = true;
+            }
+            if(wES && rA) {
+                editor.putBoolean("music",true);
+            }
+        }
+        editor.apply();
+        if (!permissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionsNeeded.toArray(new String[permissionsNeeded.size()]), REQUEST_ALL_PERMISSIONS);
         }
     }
 
     @Override
     public void checkSensorSupport() {
+        if(pref == null) {
+            pref = PreferenceManager.getDefaultSharedPreferences(this);
+        }
         SharedPreferences.Editor editor = pref.edit();
-        if(!checkIfBTSupported()){
-            editor.putBoolean("blueTooth", false);
+        if(checkIfBTSupported()){
+            editor.putBoolean("blueToothSensor", true);
+            editor.putBoolean("blueTooth",true);
         }
-        boolean b = checkIfGooglePlayServicesAvailable();
-        boolean b2 = checkIfGPSSupported();
-        if(!checkIfGPSSupported() || !checkIfGooglePlayServicesAvailable()) {
-            editor.putBoolean("location", false);
+        if(checkIfGPSSupported() || checkIfGooglePlayServicesAvailable()) {
+            editor.putBoolean("locationSensor", true);
+            editor.putBoolean("motionSensor", true);
+            editor.putBoolean("motion",true);
         }
-        if(!checkIfMotionDetectionSupported()) {
-            editor.putBoolean("motion",false);
-        }
-        if(!checkIfMusicDetectionSupported()) {
-            editor.putBoolean("music",false);
+        //if(checkIfMotionDetectionSupported()) {
+        //    editor.putBoolean("motion",true);
+       // }
+        if(checkIfMusicDetectionSupported()) {
+            editor.putBoolean("musicSensor", true);
         }
         editor.apply();
     }
 
     private ActivityRecognitionClient mActivityRecognitionClient;
-    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 5 * 1000; // 5 seconds
+    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 10 * 1000; // 5 seconds
 
     @Override
     public void startDetection() {
@@ -571,105 +837,97 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
            return;
         }
         detectionInprogress = true;
+        if(pref == null) {
+            pref = PreferenceManager.getDefaultSharedPreferences(this);
+        }
+        //pref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         checkSensorSupport();
-        askPermissions();
 
-        UserActivity ua = new UserActivity();
+        ua = new UserActivity();
+
+        //uzame pravice k so nastavljene, sicer je true
         ua.setGotMusic(!pref.getBoolean("music",true));
         ua.setGotLocation(!pref.getBoolean("location", true));
-        //ua.setGotMovement(!pref.getBoolean("motion",true));
-        ua.setGotMovement(false);
+        ua.setGotMovement(!pref.getBoolean("motion",true));
         ua.setGotPeople(!pref.getBoolean("blueTooth",true));
+
+        Log.i("User Activity:","gotMusic: "+ua.getGotMusic()+"\n"
+        +"gotLocation: "+ua.getGotLocation()+"\n"+"gotMovement: "+ua.getGotMovement()+
+        "\n"+ua.getGotPeople());
 
         ua.setUaUsername(getUser().getUsername());
         ua.setOnActivityDoneListener(viewModel);
         viewModel.setUserActivity(ua);
 
-        filterS = new IntentFilter();
-        filterS.addAction(DetectorConstants.ACTION_SONG_DETECTED);
-
-        filterP = new IntentFilter();
-        filterP.addAction(DetectorConstants.ACTION_PEOPLE_DETECTED);
-
-        filterL = new IntentFilter();
-        filterL.addAction(DetectorConstants.ACTION_LOCATION_DETECTED);
-
-        filterM = new IntentFilter();
-        filterM.addAction(DetectorConstants.ACTION_MOTION_DETECTED);
-
-        receiverP = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if(intent.getAction().equals(DetectorConstants.ACTION_PEOPLE_DETECTED)) {
-                    int detectedPeople = intent.getIntExtra(DetectorConstants.EXTRA_PEOPLE,0);
-                    Log.i("PEOPLE DETECTION","Detected people: " + detectedPeople);
-                    viewModel.onPeopleDetected(detectedPeople);
-                }
-            }
-        };
-        receiverS = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch(intent.getAction()) {
-                    case DetectorConstants.ACTION_SONG_DETECTED:
-                        String detectedSong = intent.getStringExtra(DetectorConstants.EXTRA_SONG);
-                        Log.i("SONG DETECTION", "Song detected: " + detectedSong);
-                        viewModel.onSongDetected(detectedSong);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        receiverL = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch(intent.getAction()) {
-                    case DetectorConstants.ACTION_LOCATION_DETECTED:
-                        String detectedLocation = intent.getStringExtra(DetectorConstants.EXTRA_LOCATION);
-                        Log.i("LOCATION DETECTION", "Location detected:" + detectedLocation);
-                        viewModel.onLocationDetected(detectedLocation);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        receiverM = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                switch(intent.getAction()) {
-                    case DetectorConstants.ACTION_MOTION_DETECTED:
-                        String detectedMovement = intent.getStringExtra(DetectorConstants.EXTRA_ACTIVITY);
-                        Log.i("MOVEMENT DETECTION: ","Detected movement:" + detectedMovement);
-                        removeActivityUpdatesButtonHandler();
-                        viewModel.onMotionDetected(detectedMovement);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
         registerDetectionReceivers();
-        //registerReceiver(receiverM,filterM);
+
+        boolean askPer = false;
+        //naprava ima bt. bt ni nevarna pravica zato jo mamo dodeljeno
+        if(pref.getBoolean("blueToothSensor",false) && pref.getBoolean("blueTooth",false)) {
+            //če ni bt ukloplen prosmo uporabnika d ga uklop
+            if(!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT);
+            } else {
+                startPeopleDetection();
+            }
+        }
+        //ni nevarna pravica
+        if(pref.getBoolean("motionSensor",false) && pref.getBoolean("motion",false)) {
+            startMovementDetection();
+        }
+
+        if(pref.getBoolean("locationSensor",false)) {
+            if(pref.getBoolean("location", false)) {
+                startLocationDetection();
+            } else {
+                askPer = true;
+            }
+        }
+
+        if(pref.getBoolean("musicSensor", false)) {
+            if(pref.getBoolean("music",false)) {
+                startSongDetection();
+            } else {
+                askPer = true;
+            }
+        }
+
+        if(askPer)
+            askPermissions();
+    }
+
+    @Override
+    public void startSongDetection() {
+        receiverS.register(this,filterS);
         Intent intent = new Intent(MainActivity.this, SongDetectorService.class);
         startService(intent);
+    }
 
-        Intent intentP = new Intent(MainActivity.this, PeopleDetectorService.class);
+    @Override
+    public void startPeopleDetection() {
+        receiverP.register(this,filterP);
+        intentP = new Intent(MainActivity.this, PeopleDetectorService.class);
         startService(intentP);
+    }
 
-        //location detection
-        if(mLocationDetector == null) {
-            mLocationDetector = new LocationDetector();
-        }
-        mLocationDetector.startLocationDetection(this);
-
+    @Override
+    public void startMovementDetection() {
+        receiverM.register(this,filterM);
         mActivityRecognitionClient = new ActivityRecognitionClient(this);
         Intent intentM = new Intent(MainActivity.this, DetectedActivitiesIntentService.class);
         PendingIntent pintent =  PendingIntent.getService(MainActivity.this, 0, intentM, PendingIntent.FLAG_UPDATE_CURRENT);
         requestActivityUpdatesButtonHandler(pintent);
+    }
+
+    @Override
+    public void startLocationDetection() {
+        receiverL.register(MainActivity.this,filterL);
+        if(mLocationDetector == null) {
+            mLocationDetector = new LocationDetector();
+        }
+        mLocationDetector.startLocationDetection(this);
     }
 
     public void requestActivityUpdatesButtonHandler(PendingIntent intent) {
@@ -680,23 +938,26 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
         task.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void result) {
-                Toast.makeText(MainActivity.this,
-                        "UPDATES ENABLED",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                //Toast.makeText(MainActivity.this,
+                //        "UPDATES ENABLED",
+                //        Toast.LENGTH_SHORT)
+                //        .show();
             }
         });
     }
     public void removeActivityUpdatesButtonHandler() {
+        if (mActivityRecognitionClient == null) {
+            mActivityRecognitionClient = new ActivityRecognitionClient(this);
+        }
         Task<Void> task = mActivityRecognitionClient.removeActivityUpdates(
                 getActivityDetectionPendingIntent());
         task.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void result) {
-                Toast.makeText(MainActivity.this,
-                        "UPDATES REMOVED",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                //Toast.makeText(MainActivity.this,
+                //        "UPDATES REMOVED",
+                //        Toast.LENGTH_SHORT)
+                //        .show();
             }
         });
 
@@ -704,8 +965,8 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.w("Activity recognition", "Failed to enable activity recognition.");
-                Toast.makeText(MainActivity.this, "updates not removed",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "updates not removed",
+                //        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -716,66 +977,12 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     }
 
     @Override
-    public String getUserActivity() {
-        UserActivity ua = new UserActivity();
-        //User lojze is in Ljubljana,
-        //walking and listening to enya
-        //with 2 other people.
-        boolean location = !ua.getUaLocation().isEmpty();
-        boolean movement = !ua.getUaMovement().isEmpty();
-        boolean music = !ua.getUaMusic().isEmpty();
-        boolean people = ua.getUaPeople() != 0;
-
-        String mPost = "User " + getUser().getUsername() + " is in " + ua.getUaLocation() +
-                ", hanging out and listening to " + ua.getUaMusic() + " with " + ua.getUaPeople()
-                + " other people.";
- /*       String mPost = "User " + getUser().getUsername();
-        mPost += " is ";
-        if(location) {
-            mPost += " in " + ua.getUaLocation() + ", ";
-        }
-        if(movement) {
-            mPost += ua.getUaMovement();
-        } else {
-            mPost += "hanging out";
-        }
-        if(music) {
-            mPost += " and listening to " + ua.getUaMusic();
-        }
-        if(people) {
-            mPost += " with " + ua.getUaPeople() + " other people";
-        }
-        mPost += ".";
-*/
-        return mPost;
-
-        //String tPost = "User "+getUser().getUsername()+
-        //        " is "+ua.getUaMovement()+" at "+ua.getUaLocation()
-        //        + " with "+ua.getUaPeople()+" other people.";
-//        String tPost = "User " + getUser().getUsername();
-//        if(!ua.getUaMovement().isEmpty()) {
-//            tPost += " is " + ua.getUaMovement();
-//        } else {
-//            tPost += " is hanging";
-//        }
-//        if(!ua.getUaLocation().isEmpty()) {
-//            tPost += " at " + ua.getUaLocation();
-//        }
-//        if(ua.getUaPeople() != 0) {
-//            tPost += " with " + ua.getUaPeople() + " other people";
-//        }
-//        if(!ua.getUaMusic().isEmpty()) {
-//            tPost += " while listening to " + ua.getUaMusic() + ".";
-//        } else {
-//            tPost += ".";
-//        }
-    }
-
-    @Override
     public void activityDetectedDialog(String title, final String post) {
         unregisterDetectionReceivers();
+        Log.i("DETECTED ACTIVITY"," "+post);
         detectionInprogress = false;
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);//new AlertDialog.Builder(new ContextThemeWrapper(loginActivity, R.style.Drowner));
+        viewModel.setUserActivity(new UserActivity());
+        alertDialogBuilder = new AlertDialog.Builder(this);//new AlertDialog.Builder(new ContextThemeWrapper(loginActivity, R.style.Drowner));
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setTitle(title);
         alertDialogBuilder.setMessage(getUser().getUsername()+" \n"+post);
@@ -784,6 +991,7 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
             public void onClick(DialogInterface dialog, int which) {
                 Post p = new Post(getUser().getUserID(), getUser().getUsername(), post);
                 dialog.dismiss();
+                wasDismissed = true;
                 viewModel.postDetectedActivity(p);
             }
         });
@@ -791,58 +999,79 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                wasDismissed = true;
             }
         });
-        alertDialogBuilder.show();
+        mAlertDialog = alertDialogBuilder.show();
+        wasDismissed = false;
+        mDialogPost = post;
     }
 
     public void registerDetectionReceivers() {
-        pref = (pref == null) ? PreferenceManager.getDefaultSharedPreferences(this) : pref;
-        if(detectionInprogress) {
-            if(pref.getBoolean("music",true) && !isFSregistered) {
-                if(receiverS != null && filterS != null) {
-                    registerReceiver(receiverS,filterS);
-                    isFSregistered = true;
-                }
-            }
-            if(pref.getBoolean("blueTooth",true) && !isFPregistered) {
-                if(receiverP != null && filterP != null) {
-                    registerReceiver(receiverP,filterP);
-                    isFPregistered = true;
-                }
-            }
-            if(pref.getBoolean("location",true) && !isFLregistered) {
-                if(receiverL != null && filterL != null) {
-                    registerReceiver(receiverL, filterL);
-                    isFLregistered = true;
-                }
-            }
-          //  if(pref.getBoolean("motion",true) && !isFMregistered) {
-            //    if(receiverM != null && filterM != null) {
-                    registerReceiver(receiverM, filterM);
-                    isFMregistered = true;
-              //  }
-            //}
+        if(!receiverL.isRegistered) {
+            receiverL.register(this,filterL);
+        }
+        if(!receiverS.isRegistered) {
+            receiverS.register(this,filterS);
+        }
+        if(!receiverP.isRegistered) {
+            receiverP.register(this,filterP);
+        }
+        if(!receiverM.isRegistered) {
+            receiverM.register(this,filterM);
         }
     }
     public void unregisterDetectionReceivers() {
-        if(detectionInprogress) {
-            if(isFSregistered && receiverS != null) {
-                unregisterReceiver(receiverS);
-                isFSregistered = false;
-            }
-            if(isFLregistered && receiverL != null) {
-                unregisterReceiver(receiverL);
-                isFLregistered = false;
-            }
-            if(isFMregistered && receiverM != null) {
-                unregisterReceiver(receiverM);
-                isFMregistered = false;
-            }
-            if(isFPregistered && receiverP != null) {
-                unregisterReceiver(receiverP);
-                isFPregistered = false;
-            }
+        if(receiverM.isRegistered) {
+            receiverM.unregister(this);
+            //Log.i("ON PAUSE","receiverM unregistered.");
+        }
+        if(receiverP.isRegistered) {
+            receiverP.unregister(this);
+            //Log.i("ON PAUSE","receiverP unregistered.");
+        }
+        if(receiverS.isRegistered) {
+            receiverS.unregister(this);
+            //Log.i("ON PAUSE","receiverS unregistered.");
+        }
+        if(receiverL.isRegistered) {
+            receiverL.unregister(this);
+            //Log.i("ON PAUSE","receiverL unregistered.");
         }
     }
+
+    //ni več v uporabi
+    //private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener
+   //         = new SharedPreferences.OnSharedPreferenceChangeListener() {
+    //    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+    //        switch (key) {
+    //            case "location":
+    //                if(prefs.getBoolean("location",false)) {
+    //                    Log.i("location"," is true");
+    //                    //startLocationDetection();
+    //                }
+    //                break;
+    //            case "music":
+    //                if(prefs.getBoolean("music",false)) {
+    //                    Log.i("music"," is true");
+    //                    //startSongDetection();
+     //               }
+     //               break;
+     //           case "blueTooth":
+     //               if(prefs.getBoolean("blueTooth",false)) {
+     //                   Log.i("bt"," is true");
+     //                   //startPeopleDetection();
+     //               }
+     //               break;
+     //           case "motion":
+     //               if(prefs.getBoolean("motion",false)) {
+     //                   Log.i("motion", " is true");
+     //                   //   startMovementDetection();
+     //               }
+     //               break;
+     //           default:
+     //               break;
+     //       }
+     //   }
+    //};
 }

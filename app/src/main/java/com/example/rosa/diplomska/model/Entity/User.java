@@ -12,6 +12,9 @@ import android.databinding.ObservableArrayList;
 
 import com.android.databinding.library.baseAdapters.BR;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "user",
         indices = {
             @Index(value = "userId", unique = true),
@@ -136,8 +139,17 @@ public class User extends BaseObservable {
     public void setPosts(ObservableArrayList<Post> posts){
         this.posts = posts;
     }
+    public void setPosts(ArrayList<Post> posts){
+        this.posts.addAll(posts);
+    }
+    public void setPosts(List<Post> posts){
+        this.posts.addAll(posts);
+    }
     public void addPost(Post post){
         this.posts.add(post);
+    }
+    public void deletePost(Post p) {
+        this.posts.remove(p);
     }
     public void removePost(Post post) {
         this.posts.remove(post);

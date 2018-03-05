@@ -29,6 +29,7 @@ public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     MainActivityViewModel viewModel;
     RecyclerAdapter ra;
+    MainActivity ma = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /** Inflating the layout for this fragment **/
@@ -39,7 +40,7 @@ public class ProfileFragment extends Fragment {
         View v = binding.getRoot();
 
         if(getActivity() != null) {
-            MainActivity ma = (MainActivity) getActivity();
+            ma = (MainActivity) getActivity();
             //to me rešuje pred illegal state
             viewModel = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
             viewModel.setMainNavigator(ma.getNavigator());
@@ -54,8 +55,9 @@ public class ProfileFragment extends Fragment {
         if(posts == null) {
             posts = new ObservableArrayList<>();
         }
-        if(posts.isEmpty()) {
-            viewModel.getUserPosts();
+        if(posts.isEmpty() && ma != null) {
+            posts = ma.getNavigator().getUser().getPosts();
+            //viewModel.getUserPosts();
         }
 
         ra = new RecyclerAdapter(posts);

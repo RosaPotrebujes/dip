@@ -1,6 +1,7 @@
 package com.example.rosa.diplomska.detector;
 
 
+import android.content.SharedPreferences;
 import android.location.Location;
 
 import java.io.File;
@@ -14,6 +15,11 @@ public interface MasterDetector {
     void askPermissions();
     void checkSensorSupport();
     void startDetection();
-    String getUserActivity();
     void activityDetectedDialog(String title, String post);
+    void startSongDetection();
+    void startLocationDetection();
+    void startPeopleDetection();
+    void startMovementDetection();
+    //void createOnChangedPreferenceListener();
+    //void registerOnChangedPreferenceListener(SharedPreferences.OnSharedPreferenceChangeListener listener);
 }

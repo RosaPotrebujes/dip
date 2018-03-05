@@ -20,6 +20,7 @@ public class MainActivityViewModel extends ViewModel implements
     private MasterDetector masterDetector;
     private UserActivity mUserActivity;
 
+
     public MainActivityViewModel(MainNavigator navigator) {
         this.navigator = navigator;
         this.dp = new DataProvider(navigator);
@@ -181,19 +182,32 @@ public class MainActivityViewModel extends ViewModel implements
     }
     @Override
     public void onActivityDone() {
-        String mPost = "is in " + mUserActivity.getUaLocation()
-                + ", " + mUserActivity.getUaMovement() +
-                " and listening to \"" +
-                mUserActivity.getUaMusic() + "\" with " +
-                mUserActivity.getUaPeople() + " other people.";
-        //String mPost = "User " + mUserActivity.getUaUsername() + " \nis in " +
-        //        mUserActivity.getUaLocation() + ", \nhanging out \nand listening to \n\"" +
-        //        mUserActivity.getUaMusic() + "\" \nwith " + mUserActivity.getUaPeople()
-        //        + " other people.";
+        //String mPost = "is in " + mUserActivity.getUaLocation()
+        //        + ", " + mUserActivity.getUaMovement() +
+        //        " and listening to \"" +
+        //        mUserActivity.getUaMusic() + "\" with " +
+        //        mUserActivity.getUaPeople() + " other people.";
+        String mPost = "is ";
+        if(!mUserActivity.getUaLocation().isEmpty()) {
+            mPost += " in " + mUserActivity.getUaLocation() + ", ";
+        }
+        if(!mUserActivity.getUaMovement().isEmpty()) {
+            mPost += mUserActivity.getUaMovement();
+        } else {
+            mPost += "hanging out";
+        }
+        if(!mUserActivity.getUaMusic().isEmpty()) {
+            mPost += " and listening to " + mUserActivity.getUaMusic();
+        }
+        if(mUserActivity.getUaPeople() > 0) {
+            mPost += " with " + mUserActivity.getUaPeople() + " other people";
+        }
+        mPost += ".";
         masterDetector.activityDetectedDialog("Activity detected",mPost);
     }
     public void postDetectedActivity(Post post) {
-        navigator.getProfileFragment().addUserPost(post);
+        navigator.getUser().addPost(post);
+        //navigator.getProfileFragment().addUserPost(post);
         dp.insertUserPost(post);
     }
 }

@@ -32,7 +32,7 @@ public class DetectedActivitiesIntentService extends IntentService {
 
         ArrayList<DetectedActivity> detectedActivities = (ArrayList) result.getProbableActivities();
 
-        Log.i(TAG, "activity detected");
+        //Log.i(TAG, "activity detected");
         String activity = "";
         int maxConfidence = 0;
         int defaultConfidence = 0;
@@ -50,9 +50,11 @@ public class DetectedActivitiesIntentService extends IntentService {
         if(defaultConfidence > maxConfidence) {
             activity = "hanging out";
         }
+        Log.i(TAG,"Detected activity: "+activity);
         Intent localIntent = new Intent(DetectorConstants.ACTION_MOTION_DETECTED);
         localIntent.putExtra(DetectorConstants.EXTRA_ACTIVITY,activity);
         sendBroadcast(localIntent);
+        stopSelf();
     }
     static String getActivityString(int detectedActivityType) {
         switch(detectedActivityType) {

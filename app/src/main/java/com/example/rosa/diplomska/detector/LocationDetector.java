@@ -2,6 +2,7 @@ package com.example.rosa.diplomska.detector;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -49,17 +50,19 @@ public class LocationDetector extends Application {
     boolean mLocationEnd = false;
 
     private long UPDATE_INTERVAL = 10 * 1000;  // 10 secs
-    private long FASTEST_INTERVAL = 5000; // 5 sec
+    private long FASTEST_INTERVAL = 5 * 1000; // 5 sec
     private LocationSettingsRequest mLocationSettingsRequest;
     private Task<LocationSettingsResponse> checkLocationSettingsTask;
     private FusedLocationProviderClient mFusedLocationClient;
 
     private LocationCallback mLocationCallback;
+    private LocationResolutionCallback locationResolutionCallback;
 
     public LocationDetector() {
     }
 
     private OnLocationDetectedListener mOnLocationDetectedListener;
+
     public interface OnLocationDetectedListener {
         void onLocationDetected(String location);
     }
@@ -67,6 +70,9 @@ public class LocationDetector extends Application {
         this.mOnLocationDetectedListener = listener;
     }
 
+    public LocationResolutionCallback getLocationResolutionCallback() {
+        return this.locationResolutionCallback;
+    }
     public void setUpLocationRequest(){
         this.mLocationRequest = new LocationRequest();
         this.mLocationRequest.setInterval(UPDATE_INTERVAL);
@@ -75,6 +81,7 @@ public class LocationDetector extends Application {
     }
 
     public void startLocationDetection(final MainActivity mMainActivity) {
+        Log.i(TAG,"Location detection started.");
         this.mMainActivity = mMainActivity;
         setUpLocationRequest();
         //check settings
@@ -82,6 +89,21 @@ public class LocationDetector extends Application {
         builder.addLocationRequest(mLocationRequest);
         mLocationSettingsRequest = builder.build();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mMainActivity);
+
+        locationResolutionCallback = new LocationResolutionCallback() {
+            @Override
+            public void onResolutionResult(boolean result) {
+                if(result) {
+                    startLocationUpdate();
+                } else {
+                    mAddress = "";
+                    //mOnLocationDetectedListener.onLocationDetected(mAddress);
+                    Intent locationIntent = new Intent(DetectorConstants.ACTION_LOCATION_DETECTED);
+                    locationIntent.putExtra(DetectorConstants.EXTRA_LOCATION,mAddress);
+                    mMainActivity.sendBroadcast(locationIntent);
+                }
+            }
+        };
 
         mLocationCallback = new LocationCallback() {
             @Override
@@ -92,13 +114,11 @@ public class LocationDetector extends Application {
                 } else {
                     mAddress = "";
                 }
-                stopLocationUpdate();
-
                 Intent locationIntent = new Intent(DetectorConstants.ACTION_LOCATION_DETECTED);
                 locationIntent.putExtra(DetectorConstants.EXTRA_LOCATION,mAddress);
                 mMainActivity.sendBroadcast(locationIntent);
-
                 //mOnLocationDetectedListener.onLocationDetected(mAddress);
+                stopLocationUpdate();
             }
         };
 
@@ -125,6 +145,11 @@ public class LocationDetector extends Application {
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putBoolean("location", false);
                         editor.apply();
+                        mAddress = "";
+                        //mOnLocationDetectedListener.onLocationDetected(mAddress);
+                        Intent locationIntent = new Intent(DetectorConstants.ACTION_SONG_DETECTED);
+                        locationIntent.putExtra(DetectorConstants.EXTRA_SONG,mAddress);
+                        sendBroadcast(locationIntent);
                     }
                 } else {
                     mAddress = "";
@@ -183,5 +208,8 @@ public class LocationDetector extends Application {
         mLocationStart = false;
         mLocationEnd = true;
         return mAddress;
+    }
+    public interface LocationResolutionCallback {
+        void onResolutionResult(boolean result);
     }
 }

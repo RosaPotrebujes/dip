@@ -52,8 +52,8 @@ import static com.android.volley.VolleyLog.TAG;
 public class DataProvider {
     MainNavigator mainNavigator;
     LoginNavigator loginNavigator;
-    private final String serverAddr = "http://192.168.0.102/ada_login_api/Source_Files/index.php"; //"http://192.168.1.119/ada_login_api/Source_Files/index.php";
-    final String detectAudioUrl = "http://192.168.0.102/ada_login_api/Source_Files/audioDetect.php";//"http://192.168.1.119/ada_login_api/Source_Files/audioDetect.php";
+    private final String serverAddr = "http://192.168.1.119/ada_login_api/Source_Files/index.php";
+    final String detectAudioUrl = "http://192.168.1.119/ada_login_api/Source_Files/audioDetect.php";
 
     public DataProvider() {
     }
@@ -285,8 +285,9 @@ public class DataProvider {
                                             jFriend.getString("email"),
                                             jFriend.getString("description"),false);
                                     u.add(friend);
+                                    mainNavigator.getUser().addFriend(friend);
                                 }
-                                ff.setFriends(u);
+                                //ff.setFriends(u);
                                 //ff.notifyFriendsAdapterOfChange();
                                 InsertUserFriendsLocal insertFriendsTask = new InsertUserFriendsLocal();
                                 insertFriendsTask.execute(u);
@@ -470,8 +471,9 @@ public class DataProvider {
                                             jFriend.getString("email"),
                                             jFriend.getString("description"),true);
                                     pf.add(friend);
+                                    mainNavigator.getUser().addFriend(friend);
                                 }
-                                ff.setPendingFriends(pf);
+                                //ff.setPendingFriends(pf);
                                 InsertUserFriendsLocal upf = new InsertUserFriendsLocal();
                                 upf.execute(pf);
                                 //ff.notifyPendingFriendsAdapterOfChange();
@@ -594,7 +596,8 @@ public class DataProvider {
                                     Post post = new Post(postId, posterId, username, content, timestamp, favouriteCounter);
                                     posts.add(post);
                                 }
-                                pf.setProfilePosts(posts);
+                                mainNavigator.getUser().setPosts(posts);
+                                //pf.setProfilePosts(posts);
                                 InsertUserPostsLocal insertUserPostsTask = new InsertUserPostsLocal();
                                 insertUserPostsTask.execute(posts);
                             }
@@ -636,7 +639,8 @@ public class DataProvider {
                         try {
                             if(response.getInt("success") == 0) {
                                 mainNavigator.mnAlertDialog("Ooops!",response.getString("message")); //Toast.makeText(loginActivity.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                                mainNavigator.getProfileFragment().deleteUserPost(post);
+                                mainNavigator.getUser().deletePost(post);
+                                //mainNavigator.getProfileFragment().deleteUserPost(post);
                                 //odstran post lokalno ce ni ratal
                             } else {
                                 //navigator.mnAlertDialog("Done!",response.getString("message"));
@@ -644,7 +648,8 @@ public class DataProvider {
                         } catch (JSONException e) {
                             e.printStackTrace(); //Toast.makeText(loginActivity.getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             mainNavigator.mnAlertDialog("Ooops!","Error while parsing response."); //Toast.makeText(loginActivity.getApplicationContext(),"Error while parsing response.", Toast.LENGTH_LONG).show();
-                            mainNavigator.getProfileFragment().deleteUserPost(post);
+                            mainNavigator.getUser().deletePost(post);
+                            //mainNavigator.getProfileFragment().deleteUserPost(post);
                             //odstran post lokalno ce ni ratal
                         }
                     }
@@ -654,7 +659,8 @@ public class DataProvider {
                         VolleyLog.d(TAG, "Error: " + error.getMessage());
                         mainNavigator.mnAlertDialog("Ooops!","Something went wrong. Please try again later."); //Toast.makeText(loginActivity.getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         //odstran post lokalno ce ni ratal
-                        mainNavigator.getProfileFragment().deleteUserPost(post);
+                        //mainNavigator.getProfileFragment().deleteUserPost(post);
+                        mainNavigator.getUser().deletePost(post);
                     }
                 });
         Context mContext = mainNavigator.getMNContext();

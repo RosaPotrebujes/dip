@@ -42,13 +42,14 @@ public class FriendsFragment extends Fragment implements FriendViewHolderClickLi
     ObservableArrayList<User> friends;
     ObservableArrayList<User> pendingFriends;
 
+    MainActivity ma;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_friends, container, false);
 
         if(getActivity() != null) {
-            MainActivity ma = (MainActivity) getActivity();
+            ma = (MainActivity) getActivity();
             MainNavigator mn = ma.getNavigator();
             //to me rešuje pred illegal state
             viewModel = ViewModelProviders.of(getActivity()).get(MainActivityViewModel.class);
@@ -76,10 +77,23 @@ public class FriendsFragment extends Fragment implements FriendViewHolderClickLi
         if(pendingFriends == null) {
             pendingFriends = new ObservableArrayList<>();
         }
-        if(friends.isEmpty())
-            viewModel.getUserFriends();
-        if(pendingFriends.isEmpty())
-            viewModel.getUserPendingFriends();
+        if(friends.isEmpty() && ma != null) {
+            for (User f : ma.getUser().getFriends()) {
+                if (!f.getPending()) {
+                    friends.add(f);
+                }
+            }
+            //viewModel.getUserFriends();
+        }
+
+        if(pendingFriends.isEmpty() && ma != null) {
+            for (User f : ma.getUser().getFriends()) {
+                if (f.getPending()) {
+                    pendingFriends.add(f);
+                }
+            }
+            //viewModel.getUserPendingFriends();
+        }
 
         friendsAdapter = new FriendsAdapter(friends,false, this);
         pendingFriendsAdapter = new FriendsAdapter(pendingFriends, true, this);
