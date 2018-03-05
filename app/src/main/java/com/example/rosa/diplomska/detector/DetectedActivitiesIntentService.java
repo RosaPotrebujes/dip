@@ -35,21 +35,30 @@ public class DetectedActivitiesIntentService extends IntentService {
         //Log.i(TAG, "activity detected");
         String activity = "";
         int maxConfidence = 0;
+        int maxActivityType = -1;
         int defaultConfidence = 0;
         for (DetectedActivity da: detectedActivities) {
-            if(!getActivityString(da.getType()).equals("hanging out")) {
+            //if(da.getConfidence() > maxConfidence) {
+            //    maxConfidence = da.getConfidence();
+            //    maxActivityType = da.getType();
+            //}
+            String ac = getActivityString(da.getType());
+            if(!ac.equals("hanging out")) {
                 if (maxConfidence < da.getConfidence()) {
                     maxConfidence = da.getConfidence();
                     activity = getActivityString(da.getType());
                 }
             } else {
-                defaultConfidence = da.getConfidence();
+                if(defaultConfidence < da.getConfidence())
+                    defaultConfidence = da.getConfidence();
             }
             //Log.i(TAG, getActivityString(da.getType()) + " " + da.getConfidence() + "%");
         }
-        if(defaultConfidence > maxConfidence) {
-            activity = "hanging out";
-        }
+        //if(defaultConfidence > maxConfidence) {
+        //    activity = "hanging out";
+        //}
+
+
         Log.i(TAG,"Detected activity: "+activity);
         Intent localIntent = new Intent(DetectorConstants.ACTION_MOTION_DETECTED);
         localIntent.putExtra(DetectorConstants.EXTRA_ACTIVITY,activity);
@@ -66,6 +75,8 @@ public class DetectedActivitiesIntentService extends IntentService {
                 return "running";
             case DetectedActivity.WALKING:
                 return "walking";
+            //case DetectedActivity.STILL:
+            //    return "hanging out";
             default:
                 return "hanging out";
         }
