@@ -288,7 +288,8 @@ public class DataProvider {
                                     mainNavigator.getUser().addFriend(friend);
                                 }
                                 //ff.setFriends(u);
-                                //ff.notifyFriendsAdapterOfChange();
+                                if(!ff.isFriendsAdapterNull() && !ff.isPendingFriendsAdapterNull())
+                                    ff.notifyFriendsAdapterOfChange();
                                 InsertUserFriendsLocal insertFriendsTask = new InsertUserFriendsLocal();
                                 insertFriendsTask.execute(u);
                             }
@@ -649,6 +650,7 @@ public class DataProvider {
                             e.printStackTrace(); //Toast.makeText(loginActivity.getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             mainNavigator.mnAlertDialog("Ooops!","Error while parsing response."); //Toast.makeText(loginActivity.getApplicationContext(),"Error while parsing response.", Toast.LENGTH_LONG).show();
                             mainNavigator.getUser().deletePost(post);
+                            mainNavigator.getProfileFragment().notifyProfileAdapterOfChange();
                             //mainNavigator.getProfileFragment().deleteUserPost(post);
                             //odstran post lokalno ce ni ratal
                         }
@@ -661,6 +663,7 @@ public class DataProvider {
                         //odstran post lokalno ce ni ratal
                         //mainNavigator.getProfileFragment().deleteUserPost(post);
                         mainNavigator.getUser().deletePost(post);
+                        mainNavigator.getProfileFragment().notifyProfileAdapterOfChange();
                     }
                 });
         Context mContext = mainNavigator.getMNContext();

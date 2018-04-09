@@ -140,6 +140,13 @@ public class FriendsFragment extends Fragment implements FriendViewHolderClickLi
         friendsAdapter.getItemCount();
     }
 
+    public boolean isFriendsAdapterNull() {
+        return friendsAdapter == null;
+    }
+
+    public boolean isPendingFriendsAdapterNull() {
+        return pendingFriendsAdapter == null;
+    }
     @Override
     public void clickedAcceptFriendRequest(View v) {
         int friendPosition = pendingFriendsLayoutManager.getPosition(v);

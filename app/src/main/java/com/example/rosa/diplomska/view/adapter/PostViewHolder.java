@@ -20,8 +20,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         mBinding = binding;
 
         //userPic = (ImageView) binding.getRoot().findViewById(R.id.home_user_pic);
-
-        mBinding.homeFavPost.setOnClickListener(this);
+        //ikonca za favourite
+        //mBinding.homeFavPost.setOnClickListener(this);
 
 //        without binding
 //        fav = (ImageView) binding.getRoot().findViewById(R.id.home_fav_post);
@@ -36,7 +36,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.home_fav_post:
+            //za favourite opcija
+            /*case R.id.home_fav_post:
                 if (v.getTag().toString().equals("unfav")) {
                     mBinding.homeFavPost.setImageResource(R.drawable.star_full_icon);
                     mBinding.homeFavPost.setTag("fav");
@@ -46,7 +47,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 }
                 break;
             default:
-                break;
+                break;*/
         }
     }
 }

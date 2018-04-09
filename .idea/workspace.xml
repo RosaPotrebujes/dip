@@ -62,19 +62,20 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1262">
-              <caret line="918" column="10" lean-forward="true" selection-start-line="918" selection-start-column="10" selection-end-line="918" selection-end-column="10" />
+            <state relative-caret-position="478">
+              <caret line="1000" column="53" lean-forward="false" selection-start-line="1000" selection-start-column="53" selection-end-line="1000" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8969#9078#0" expanded="false" />
+                <element signature="e#9056#9165#0" expanded="false" />
                 <element signature="method#getProfileFragment#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#saveProfileChanges#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#endEditMode#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setUpMainActivity#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#startLoginActivity#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#onNavItemSelected#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#mnAlertDialog#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getHomeFragment#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#setHomePosts#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getFriendsFragment#0;class#MainActivity#0" expanded="false" />
@@ -84,254 +85,35 @@
                 <element signature="method#clickedAddFriend#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#disableFindFriendInterface#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#enableFindFriendInterface#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#24238#24259#0" expanded="false" />
-                <element signature="e#25643#25680#0" expanded="false" />
-                <element signature="e#26678#26756#0" expanded="false" />
-                <element signature="method#onSaveInstanceState#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#24325#24346#0" expanded="false" />
+                <element signature="e#25730#25767#0" expanded="false" />
+                <element signature="e#26765#26843#0" expanded="false" />
                 <element signature="method#checkIfBTSupported#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#checkIfMusicDetectionSupported#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#checkIfMotionDetectionSupported#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#checkIfGPSSupported#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#checkIfGooglePlayServicesAvailable#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#askPermissions#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#30629#30673#0" expanded="false" />
-                <element signature="e#34476#34517#0" expanded="false" />
-                <element signature="method#requestActivityUpdatesButtonHandler#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#38728#38763#0" expanded="false" />
+                <element signature="e#30719#30763#0" expanded="false" />
+                <element signature="method#checkSensorSupport#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#34566#34607#0" expanded="false" />
+                <element signature="method#startSongDetection#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#startPeopleDetection#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#startLocationDetection#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#39243#39278#0" expanded="false" />
                 <element signature="method#removeActivityUpdatesButtonHandler#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#39398#39433#0" expanded="false" />
-                <element signature="e#39832#39890#0" expanded="false" />
+                <element signature="e#39913#39948#0" expanded="false" />
+                <element signature="e#40347#40405#0" expanded="false" />
                 <element signature="method#getActivityDetectionPendingIntent#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#activityDetectedDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#41533#41898#0" expanded="true" />
+                <element signature="e#41897#41898#0" expanded="true" />
                 <element signature="method#registerDetectionReceivers#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#unregisterDetectionReceivers#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#42716#42734#0" expanded="false" />
-                <marker date="1520214219303" expanded="false" signature="31341:31699" ph="//..." />
+                <element signature="e#43372#43390#0" expanded="false" />
+                <marker date="1523240294961" expanded="false" signature="31431:31789" ph="//..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/Activity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147576">
-              <caret line="6951" column="0" lean-forward="false" selection-start-line="6951" selection-start-column="0" selection-end-line="6951" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#303047#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#39967#39968#0" expanded="false" />
-                <element signature="e#39997#39998#0" expanded="false" />
-                <element signature="e#40384#40385#0" expanded="false" />
-                <element signature="e#40419#40420#0" expanded="false" />
-                <element signature="e#40527#40528#0" expanded="false" />
-                <element signature="e#40562#40563#0" expanded="false" />
-                <element signature="e#40665#40666#0" expanded="false" />
-                <element signature="e#40703#40704#0" expanded="false" />
-                <element signature="e#40817#40818#0" expanded="false" />
-                <element signature="e#40847#40848#0" expanded="false" />
-                <element signature="e#40961#40962#0" expanded="false" />
-                <element signature="e#40998#40999#0" expanded="false" />
-                <element signature="e#41346#41347#0" expanded="false" />
-                <element signature="e#41376#41377#0" expanded="false" />
-                <element signature="e#41513#41514#0" expanded="false" />
-                <element signature="e#41565#41566#0" expanded="false" />
-                <element signature="e#41907#41908#0" expanded="false" />
-                <element signature="e#41980#41981#0" expanded="false" />
-                <element signature="e#50815#50816#0" expanded="false" />
-                <element signature="e#50867#50868#0" expanded="false" />
-                <element signature="e#54264#54265#0" expanded="false" />
-                <element signature="e#54294#54295#0" expanded="false" />
-                <element signature="e#57430#57431#0" expanded="false" />
-                <element signature="e#57477#57478#0" expanded="false" />
-                <element signature="e#58335#58336#0" expanded="false" />
-                <element signature="e#58374#58375#0" expanded="false" />
-                <element signature="e#72173#72174#0" expanded="false" />
-                <element signature="e#72201#72202#0" expanded="false" />
-                <element signature="e#72981#72982#0" expanded="false" />
-                <element signature="e#73008#73009#0" expanded="false" />
-                <element signature="e#86834#86835#0" expanded="false" />
-                <element signature="e#86875#86876#0" expanded="false" />
-                <element signature="e#91190#91191#0" expanded="false" />
-                <element signature="e#91217#91218#0" expanded="false" />
-                <element signature="e#92915#92916#0" expanded="false" />
-                <element signature="e#92942#92943#0" expanded="false" />
-                <element signature="e#94780#94781#0" expanded="false" />
-                <element signature="e#94834#94835#0" expanded="false" />
-                <element signature="e#101879#101880#0" expanded="false" />
-                <element signature="e#101930#101931#0" expanded="false" />
-                <element signature="e#108780#108781#0" expanded="false" />
-                <element signature="e#108832#108833#0" expanded="false" />
-                <element signature="e#109002#109003#0" expanded="false" />
-                <element signature="e#109056#109057#0" expanded="false" />
-                <element signature="e#116877#116878#0" expanded="false" />
-                <element signature="e#116905#116906#0" expanded="false" />
-                <element signature="e#118280#118281#0" expanded="false" />
-                <element signature="e#118308#118309#0" expanded="false" />
-                <element signature="e#121004#121005#0" expanded="false" />
-                <element signature="e#121032#121033#0" expanded="false" />
-                <element signature="e#122262#122263#0" expanded="false" />
-                <element signature="e#122290#122291#0" expanded="false" />
-                <element signature="e#133138#133139#0" expanded="false" />
-                <element signature="e#133165#133166#0" expanded="false" />
-                <element signature="e#145100#145101#0" expanded="false" />
-                <element signature="e#145137#145138#0" expanded="false" />
-                <element signature="e#149374#149375#0" expanded="false" />
-                <element signature="e#149431#149432#0" expanded="false" />
-                <element signature="e#149767#149768#0" expanded="false" />
-                <element signature="e#149824#149825#0" expanded="false" />
-                <element signature="e#150126#150127#0" expanded="false" />
-                <element signature="e#150164#150165#0" expanded="false" />
-                <element signature="e#152037#152038#0" expanded="false" />
-                <element signature="e#152064#152065#0" expanded="false" />
-                <element signature="e#153766#153767#0" expanded="false" />
-                <element signature="e#153807#153808#0" expanded="false" />
-                <element signature="e#154001#154002#0" expanded="false" />
-                <element signature="e#154046#154047#0" expanded="false" />
-                <element signature="e#155756#155757#0" expanded="false" />
-                <element signature="e#155792#155793#0" expanded="false" />
-                <element signature="e#162855#162856#0" expanded="false" />
-                <element signature="e#162890#162891#0" expanded="false" />
-                <element signature="e#166213#166214#0" expanded="false" />
-                <element signature="e#166259#166260#0" expanded="false" />
-                <element signature="e#168014#168015#0" expanded="false" />
-                <element signature="e#168068#168069#0" expanded="false" />
-                <element signature="e#191654#191655#0" expanded="false" />
-                <element signature="e#191702#191703#0" expanded="false" />
-                <element signature="e#193494#193495#0" expanded="false" />
-                <element signature="e#193540#193541#0" expanded="false" />
-                <element signature="e#209057#209058#0" expanded="false" />
-                <element signature="e#209084#209085#0" expanded="false" />
-                <element signature="e#216147#216148#0" expanded="false" />
-                <element signature="e#216174#216175#0" expanded="false" />
-                <element signature="e#219865#219866#0" expanded="false" />
-                <element signature="e#219897#219898#0" expanded="false" />
-                <element signature="e#220076#220077#0" expanded="false" />
-                <element signature="e#220109#220110#0" expanded="false" />
-                <element signature="e#220673#220674#0" expanded="false" />
-                <element signature="e#220719#220720#0" expanded="false" />
-                <element signature="e#222668#222669#0" expanded="false" />
-                <element signature="e#222722#222723#0" expanded="false" />
-                <element signature="e#224442#224443#0" expanded="false" />
-                <element signature="e#224466#224467#0" expanded="false" />
-                <element signature="e#226654#226655#0" expanded="false" />
-                <element signature="e#226708#226709#0" expanded="false" />
-                <element signature="e#236642#236643#0" expanded="false" />
-                <element signature="e#236675#236676#0" expanded="false" />
-                <element signature="e#238804#238805#0" expanded="false" />
-                <element signature="e#238846#238847#0" expanded="false" />
-                <element signature="e#239438#239439#0" expanded="false" />
-                <element signature="e#239467#239468#0" expanded="false" />
-                <element signature="e#239507#239508#0" expanded="false" />
-                <element signature="e#239541#239542#0" expanded="false" />
-                <element signature="e#246367#246368#0" expanded="false" />
-                <element signature="e#246426#246427#0" expanded="false" />
-                <element signature="e#247835#247836#0" expanded="false" />
-                <element signature="e#247890#247891#0" expanded="false" />
-                <element signature="e#249033#249034#0" expanded="false" />
-                <element signature="e#249060#249061#0" expanded="false" />
-                <element signature="e#261010#261011#0" expanded="false" />
-                <element signature="e#261040#261041#0" expanded="false" />
-                <element signature="e#278676#278677#0" expanded="false" />
-                <element signature="e#278742#278743#0" expanded="false" />
-                <element signature="e#279992#279993#0" expanded="false" />
-                <element signature="e#280024#280025#0" expanded="false" />
-                <element signature="e#291449#291450#0" expanded="false" />
-                <element signature="e#291480#291481#0" expanded="false" />
-                <element signature="e#299702#299703#0" expanded="false" />
-                <element signature="e#299759#299760#0" expanded="false" />
-                <element signature="e#300033#300034#0" expanded="false" />
-                <element signature="e#300078#300079#0" expanded="false" />
-                <element signature="e#300731#300732#0" expanded="false" />
-                <element signature="e#300775#300776#0" expanded="false" />
-                <element signature="e#300842#300843#0" expanded="false" />
-                <element signature="e#300903#300904#0" expanded="false" />
-                <element signature="e#302345#302346#0" expanded="false" />
-                <element signature="e#302395#302396#0" expanded="false" />
-                <element signature="e#302807#302808#0" expanded="false" />
-                <element signature="e#302868#302869#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/UserActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationDetector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3647#4271#0" expanded="true" />
-                <element signature="e#4270#4271#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="62" column="23" lean-forward="true" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PeopleDetectorService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/PeopleDetectorService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-              <folding>
-                <marker date="1520213888511" expanded="false" signature="3028:3039" ph=" { " />
-                <marker date="1520213888511" expanded="false" signature="3051:3057" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityThread.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/ActivityThread.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="3360" column="0" lean-forward="false" selection-start-line="3360" selection-start-column="0" selection-end-line="3360" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivityViewModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-              <folding>
-                <element signature="method#onButtonAddFriendClick#0;class#MainActivityViewModel#0" expanded="false" />
-                <element signature="method#clickedFindFriend#0;class#MainActivityViewModel#0" expanded="false" />
-                <element signature="e#4250#4251#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MasterDetector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/MasterDetector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -339,13 +121,157 @@
       <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
+            <state relative-caret-position="1760">
               <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="10" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="friend.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/friend.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-633">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/post.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="599">
+              <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/post.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="599">
+              <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostViewHolder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/adapter/PostViewHolder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_profile.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+              <folding>
+                <element signature="e#889#903#0" expanded="true" />
+                <element signature="e#979#1012#0" expanded="true" />
+                <element signature="e#1051#1084#0" expanded="true" />
+                <element signature="e#1122#1149#0" expanded="true" />
+                <element signature="e#1502#1535#0" expanded="true" />
+                <element signature="e#1575#1608#0" expanded="true" />
+                <element signature="e#1679#1693#0" expanded="true" />
+                <element signature="e#1985#2018#0" expanded="true" />
+                <element signature="e#2057#2090#0" expanded="true" />
+                <element signature="e#2128#2155#0" expanded="true" />
+                <element signature="e#2246#2260#0" expanded="true" />
+                <marker date="1523239698446" expanded="false" signature="2544:2558" ph="&quot;16sp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="2634:2667" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="2706:2739" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="2777:2804" ph="&quot;30dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3157:3190" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3230:3263" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3334:3348" ph="&quot;16sp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3640:3673" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3712:3745" ph="&quot;10dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3783:3810" ph="&quot;30dp&quot;" />
+                <marker date="1523239698446" expanded="false" signature="3901:3915" ph="&quot;16sp&quot;" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_profile.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/fragment_profile.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+              <folding>
+                <element signature="e#889#903#0" expanded="true" />
+                <element signature="e#979#1012#0" expanded="true" />
+                <element signature="e#1051#1084#0" expanded="true" />
+                <element signature="e#1122#1149#0" expanded="true" />
+                <element signature="e#1502#1535#0" expanded="true" />
+                <element signature="e#1575#1608#0" expanded="true" />
+                <element signature="e#1679#1693#0" expanded="true" />
+                <element signature="e#1985#2018#0" expanded="true" />
+                <element signature="e#2057#2090#0" expanded="true" />
+                <element signature="e#2128#2155#0" expanded="true" />
+                <element signature="e#2246#2260#0" expanded="true" />
+                <marker date="1523239755494" expanded="false" signature="2573:2587" ph="&quot;16sp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="2663:2696" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="2735:2768" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="2806:2833" ph="&quot;30dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3186:3219" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3259:3292" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3363:3377" ph="&quot;16sp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3669:3702" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3741:3774" ph="&quot;10dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3812:3839" ph="&quot;30dp&quot;" />
+                <marker date="1523239755494" expanded="false" signature="3930:3944" ph="&quot;16sp&quot;" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/ProfileFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="84" column="57" lean-forward="false" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -364,21 +290,17 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>registerRe</find>
-      <find>navigation</find>
       <find>setposts</find>
       <find>isenab</find>
       <find>&quot;blueTooth&quot;,true</find>
       <find>&quot;blueTooth&quot;, true</find>
       <find>motiondete</find>
       <find>detectioninprogre</find>
-      <find>detectioninprogress</find>
       <find>ondestroy</find>
       <find>setuppeopledete</find>
       <find>onshared</find>
       <find>onsaved</find>
       <find>saved</find>
-      <find>onsave</find>
       <find>onsa</find>
       <find>mActivityRecognitionClient</find>
       <find>ons</find>
@@ -393,7 +315,11 @@
       <find>filterp</find>
       <find>peopledete</find>
       <find>intentp</find>
+      <find>startDe</find>
       <find>startdete</find>
+      <find>onsave</find>
+      <find>fab</find>
+      <find>detectioninprogress</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -2573,12 +2499,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/DetectActivityFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/BTDetector.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/BTEnableService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/BTDetectionService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/FetchAddressIntentService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/dataSync/DataSyncAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/UserActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/MasterDetectorService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_detect_activity.xml" />
@@ -2603,26 +2523,32 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/header.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/Post.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/post.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/User.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/volley/DataProvider.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/FriendsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/AppDatabase.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectorConstants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/SongReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectionReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/SongDetectorService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectedActivitiesIntentService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/MasterDetector.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/PeopleDetectorService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectedActivitiesIntentService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/PostDao.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/UserDao.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/AppDatabase.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/FriendsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/volley/DataProvider.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/post.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/post.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/adapter/PostViewHolder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/fragment_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java" />
       </list>
     </option>
@@ -2648,6 +2574,123 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Diplomska" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2721,167 +2764,12 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diplomska" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="detector" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="device.picker.selection" value="BH9048FD4Z" />
+    <property name="device.picker.selection" value="YT911BJDMW" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MusicDetector" />
     <property name="SearchEverywhereHistoryKey" value="mani&#9;FILE&#9;file://C:/Users/Dom/AndroidStudioProjects/Diplomska/app/src/main/AndroidManifest.xml&#10;fragment_add_&#9;PSI&#9;JAVA://com.example.rosa.diplomska.R.layout#fragment_add_friend&#10;post&#9;FILE&#9;file://C:/Users/Dom/AndroidStudioProjects/Diplomska/app/src/main/java/com/example/rosa/diplomska/view/adapter/PostViewHolder.java&#10;theme&#9;PSI&#9;JAVA://android.content.res.Resources.Theme&#10;snackb&#9;PSI&#9;JAVA://android.support.design.widget.Snackbar&#10;USER&#9;PSI&#9;JAVA://com.example.rosa.diplomska.data.entities.User&#10;getPosts&#9;PSI&#9;JAVA://com.example.rosa.diplomska.data.tables.entities.User#getPosts&#10;getPos&#9;PSI&#9;JAVA://com.example.rosa.diplomska.view.fragment.ProfileFragment#getPosts&#10;vers&#9;ACTION&#9;ActivateVersionControlToolWindow" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="2.3.3" />
@@ -3014,7 +2902,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520214359951" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523240376087" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -3062,7 +2950,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520214359951" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523240376087" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3094,27 +2982,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -3245,7 +3112,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520214359957" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523240376090" />
       </method>
     </configuration>
     <list size="2">
@@ -3302,33 +3169,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33026466" sideWeight="0.49786097" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30116278" sideWeight="0.39605632" order="14" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17914438" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45172414" sideWeight="0.60394365" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33026466" sideWeight="0.49786097" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.49786097" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29885057" sideWeight="0.32834226" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30116278" sideWeight="0.39605632" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33100858" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879046" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39764705" sideWeight="0.32867885" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23475936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.48502675" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23475936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.05989305" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17914438" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4045977" sideWeight="0.60394365" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3338,6 +3203,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873562" sideWeight="0.48502675" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33026466" sideWeight="0.49786097" order="8" side_tool="false" content_ui="tabs" />
@@ -3353,8 +3219,8 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12901409" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45172414" sideWeight="0.60394365" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17914438" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4045977" sideWeight="0.60394365" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.49786097" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29885057" sideWeight="0.32834226" order="10" side_tool="false" content_ui="tabs" />
@@ -3397,21 +3263,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/volley/DataProvider.java</url>
-          <line>743</line>
+          <line>746</line>
           <properties />
           <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java</url>
-          <line>95</line>
-          <properties />
-          <option name="timeStamp" value="342" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java</url>
-          <line>578</line>
-          <properties />
-          <option name="timeStamp" value="380" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java</url>
@@ -3419,303 +3273,15 @@
           <properties />
           <option name="timeStamp" value="390" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java</url>
-          <line>835</line>
-          <properties />
-          <option name="timeStamp" value="395" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java</url>
-          <line>541</line>
-          <properties />
-          <option name="timeStamp" value="401" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/PeopleDetectorService.java</url>
-          <line>167</line>
-          <properties />
-          <option name="timeStamp" value="403" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="407" />
+      <option name="time" value="413" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="app">
-        <watch expression="e" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/RegisterFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="145" column="29" lean-forward="true" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/LoginCredentials.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/LoginActivityViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="46" column="14" lean-forward="true" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Registration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="18" column="27" lean-forward="true" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="37" column="50" lean-forward="true" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="22" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_friends.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_detect_activity_dialog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_friend.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_about.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/post.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding>
-            <element signature="e#728#1002#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/header.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding>
-            <element signature="e#936#1224#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/navigator/LoginNavigator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-352">
-          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/os/AsyncTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="565" column="53" lean-forward="false" selection-start-line="565" selection-start-column="53" selection-end-line="565" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/navigator/MainNavigator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2728">
-          <caret line="167" column="5" lean-forward="false" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
-          <folding>
-            <element signature="e#4876#4877#0" expanded="false" />
-            <element signature="e#4921#4922#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/Post.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2156">
-          <caret line="117" column="42" lean-forward="false" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/volley/DataProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2838">
-          <caret line="294" column="51" lean-forward="false" selection-start-line="294" selection-start-column="51" selection-end-line="294" selection-end-column="51" />
-          <folding>
-            <element signature="method#register#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#loadUserFriends#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#loadUserPendingFriends#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#deleteFriend#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#sendFriendRequest#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#acceptFriendRequest#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#declineFriendRequest#0;class#DataProvider#0" expanded="false" />
-            <element signature="method#loadUserPendingFriendsVolley#0;class#DataProvider#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/ProfileFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1056">
-          <caret line="67" column="5" lean-forward="false" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/FriendsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1628">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="method#getMockFriends#0;class#FriendsFragment#0" expanded="false" />
-            <element signature="method#getMockPendingFriends#0;class#FriendsFragment#0" expanded="false" />
-            <element signature="method#getUserIdFromPreferences#0;class#FriendsFragment#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/AppDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-21/android/app/Instrumentation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-21/android/os/Trace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -3791,29 +3357,209 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/SongDetectorService.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="147576">
+          <caret line="6951" column="0" lean-forward="false" selection-start-line="6951" selection-start-column="0" selection-end-line="6951" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="3360" column="0" lean-forward="false" selection-start-line="3360" selection-start-column="0" selection-end-line="3360" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/PeopleDetectorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.android/build-cache/e5cb75d4c0dd1bdcbe83fd160cd88e4a657e905a/output/jars/classes.jar!/com/google/android/gms/location/DetectedActivity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/LoginFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/RegisterFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1738">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/RoomTypeConverters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/NameAndId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/PostIdNameAndContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="59" lean-forward="true" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="38" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Registration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="39" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-437">
+          <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/AppDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="35" column="57" lean-forward="false" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="75" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/Entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="27" selection-end-column="23" />
           <folding>
-            <element signature="e#1739#1865#0" expanded="false" />
-            <element signature="e#1864#1865#0" expanded="false" />
-            <element signature="e#4211#5947#0" expanded="false" />
-            <element signature="e#5946#5947#0" expanded="false" />
+            <element signature="e#4970#4971#0" expanded="false" />
+            <element signature="e#5018#5019#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectedActivitiesIntentService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="61" column="33" lean-forward="false" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+        <state relative-caret-position="550">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="e#626#627#0" expanded="false" />
-            <element signature="e#652#653#0" expanded="false" />
-            <element signature="e#696#697#0" expanded="false" />
-            <element signature="e#728#729#0" expanded="false" />
+            <element signature="e#1253#1328#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/data/PostDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="e#1043#1104#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/UserActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="102" column="4" lean-forward="false" selection-start-line="102" selection-start-column="4" selection-end-line="110" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="205" column="22" lean-forward="true" selection-start-line="205" selection-start-column="22" selection-end-line="205" selection-end-column="22" />
+          <folding>
+            <element signature="method#onButtonAddFriendClick#0;class#MainActivityViewModel#0" expanded="false" />
+            <element signature="method#clickedFindFriend#0;class#MainActivityViewModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/MasterDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="100" column="72" lean-forward="false" selection-start-line="100" selection-start-column="72" selection-end-line="100" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/LoginCredentials.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="34" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/model/CustomDataBindingAdapters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/SongDetectorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1295">
+          <caret line="104" column="17" lean-forward="false" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3821,168 +3567,87 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="16" column="27" lean-forward="false" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/FriendsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2222">
+          <caret line="147" column="45" lean-forward="false" selection-start-line="147" selection-start-column="45" selection-end-line="147" selection-end-column="45" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#getMockFriends#0;class#FriendsFragment#0" expanded="false" />
+            <element signature="method#getMockPendingFriends#0;class#FriendsFragment#0" expanded="false" />
+            <element signature="method#getUserIdFromPreferences#0;class#FriendsFragment#0" expanded="false" />
+            <element signature="e#5356#5357#0" expanded="false" />
+            <element signature="e#5409#5410#0" expanded="false" />
+            <element signature="e#5609#5610#0" expanded="false" />
+            <element signature="e#5654#5655#0" expanded="false" />
+            <element signature="e#5706#5707#0" expanded="false" />
+            <element signature="e#5758#5759#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/Activity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/volley/DataProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147576">
-          <caret line="6951" column="0" lean-forward="false" selection-start-line="6951" selection-start-column="0" selection-end-line="6951" selection-end-column="0" />
+        <state relative-caret-position="1298">
+          <caret line="290" column="99" lean-forward="false" selection-start-line="290" selection-start-column="99" selection-end-line="290" selection-end-column="99" />
           <folding>
-            <element signature="e#0#303047#0" expanded="false" />
+            <element signature="method#login#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#register#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#getUserPosts#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#loadUserFriends#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#loadUserPendingFriends#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#deleteFriend#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#sendFriendRequest#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#acceptFriendRequest#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#declineFriendRequest#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#loadUserPendingFriendsVolley#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#getHomePostsVolley#0;class#DataProvider#0" expanded="false" />
+            <element signature="method#getUserPostsVolley#0;class#DataProvider#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/DetectedActivitiesIntentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+          <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#39967#39968#0" expanded="false" />
-            <element signature="e#39997#39998#0" expanded="false" />
-            <element signature="e#40384#40385#0" expanded="false" />
-            <element signature="e#40419#40420#0" expanded="false" />
-            <element signature="e#40527#40528#0" expanded="false" />
-            <element signature="e#40562#40563#0" expanded="false" />
-            <element signature="e#40665#40666#0" expanded="false" />
-            <element signature="e#40703#40704#0" expanded="false" />
-            <element signature="e#40817#40818#0" expanded="false" />
-            <element signature="e#40847#40848#0" expanded="false" />
-            <element signature="e#40961#40962#0" expanded="false" />
-            <element signature="e#40998#40999#0" expanded="false" />
-            <element signature="e#41346#41347#0" expanded="false" />
-            <element signature="e#41376#41377#0" expanded="false" />
-            <element signature="e#41513#41514#0" expanded="false" />
-            <element signature="e#41565#41566#0" expanded="false" />
-            <element signature="e#41907#41908#0" expanded="false" />
-            <element signature="e#41980#41981#0" expanded="false" />
-            <element signature="e#50815#50816#0" expanded="false" />
-            <element signature="e#50867#50868#0" expanded="false" />
-            <element signature="e#54264#54265#0" expanded="false" />
-            <element signature="e#54294#54295#0" expanded="false" />
-            <element signature="e#57430#57431#0" expanded="false" />
-            <element signature="e#57477#57478#0" expanded="false" />
-            <element signature="e#58335#58336#0" expanded="false" />
-            <element signature="e#58374#58375#0" expanded="false" />
-            <element signature="e#72173#72174#0" expanded="false" />
-            <element signature="e#72201#72202#0" expanded="false" />
-            <element signature="e#72981#72982#0" expanded="false" />
-            <element signature="e#73008#73009#0" expanded="false" />
-            <element signature="e#86834#86835#0" expanded="false" />
-            <element signature="e#86875#86876#0" expanded="false" />
-            <element signature="e#91190#91191#0" expanded="false" />
-            <element signature="e#91217#91218#0" expanded="false" />
-            <element signature="e#92915#92916#0" expanded="false" />
-            <element signature="e#92942#92943#0" expanded="false" />
-            <element signature="e#94780#94781#0" expanded="false" />
-            <element signature="e#94834#94835#0" expanded="false" />
-            <element signature="e#101879#101880#0" expanded="false" />
-            <element signature="e#101930#101931#0" expanded="false" />
-            <element signature="e#108780#108781#0" expanded="false" />
-            <element signature="e#108832#108833#0" expanded="false" />
-            <element signature="e#109002#109003#0" expanded="false" />
-            <element signature="e#109056#109057#0" expanded="false" />
-            <element signature="e#116877#116878#0" expanded="false" />
-            <element signature="e#116905#116906#0" expanded="false" />
-            <element signature="e#118280#118281#0" expanded="false" />
-            <element signature="e#118308#118309#0" expanded="false" />
-            <element signature="e#121004#121005#0" expanded="false" />
-            <element signature="e#121032#121033#0" expanded="false" />
-            <element signature="e#122262#122263#0" expanded="false" />
-            <element signature="e#122290#122291#0" expanded="false" />
-            <element signature="e#133138#133139#0" expanded="false" />
-            <element signature="e#133165#133166#0" expanded="false" />
-            <element signature="e#145100#145101#0" expanded="false" />
-            <element signature="e#145137#145138#0" expanded="false" />
-            <element signature="e#149374#149375#0" expanded="false" />
-            <element signature="e#149431#149432#0" expanded="false" />
-            <element signature="e#149767#149768#0" expanded="false" />
-            <element signature="e#149824#149825#0" expanded="false" />
-            <element signature="e#150126#150127#0" expanded="false" />
-            <element signature="e#150164#150165#0" expanded="false" />
-            <element signature="e#152037#152038#0" expanded="false" />
-            <element signature="e#152064#152065#0" expanded="false" />
-            <element signature="e#153766#153767#0" expanded="false" />
-            <element signature="e#153807#153808#0" expanded="false" />
-            <element signature="e#154001#154002#0" expanded="false" />
-            <element signature="e#154046#154047#0" expanded="false" />
-            <element signature="e#155756#155757#0" expanded="false" />
-            <element signature="e#155792#155793#0" expanded="false" />
-            <element signature="e#162855#162856#0" expanded="false" />
-            <element signature="e#162890#162891#0" expanded="false" />
-            <element signature="e#166213#166214#0" expanded="false" />
-            <element signature="e#166259#166260#0" expanded="false" />
-            <element signature="e#168014#168015#0" expanded="false" />
-            <element signature="e#168068#168069#0" expanded="false" />
-            <element signature="e#191654#191655#0" expanded="false" />
-            <element signature="e#191702#191703#0" expanded="false" />
-            <element signature="e#193494#193495#0" expanded="false" />
-            <element signature="e#193540#193541#0" expanded="false" />
-            <element signature="e#209057#209058#0" expanded="false" />
-            <element signature="e#209084#209085#0" expanded="false" />
-            <element signature="e#216147#216148#0" expanded="false" />
-            <element signature="e#216174#216175#0" expanded="false" />
-            <element signature="e#219865#219866#0" expanded="false" />
-            <element signature="e#219897#219898#0" expanded="false" />
-            <element signature="e#220076#220077#0" expanded="false" />
-            <element signature="e#220109#220110#0" expanded="false" />
-            <element signature="e#220673#220674#0" expanded="false" />
-            <element signature="e#220719#220720#0" expanded="false" />
-            <element signature="e#222668#222669#0" expanded="false" />
-            <element signature="e#222722#222723#0" expanded="false" />
-            <element signature="e#224442#224443#0" expanded="false" />
-            <element signature="e#224466#224467#0" expanded="false" />
-            <element signature="e#226654#226655#0" expanded="false" />
-            <element signature="e#226708#226709#0" expanded="false" />
-            <element signature="e#236642#236643#0" expanded="false" />
-            <element signature="e#236675#236676#0" expanded="false" />
-            <element signature="e#238804#238805#0" expanded="false" />
-            <element signature="e#238846#238847#0" expanded="false" />
-            <element signature="e#239438#239439#0" expanded="false" />
-            <element signature="e#239467#239468#0" expanded="false" />
-            <element signature="e#239507#239508#0" expanded="false" />
-            <element signature="e#239541#239542#0" expanded="false" />
-            <element signature="e#246367#246368#0" expanded="false" />
-            <element signature="e#246426#246427#0" expanded="false" />
-            <element signature="e#247835#247836#0" expanded="false" />
-            <element signature="e#247890#247891#0" expanded="false" />
-            <element signature="e#249033#249034#0" expanded="false" />
-            <element signature="e#249060#249061#0" expanded="false" />
-            <element signature="e#261010#261011#0" expanded="false" />
-            <element signature="e#261040#261041#0" expanded="false" />
-            <element signature="e#278676#278677#0" expanded="false" />
-            <element signature="e#278742#278743#0" expanded="false" />
-            <element signature="e#279992#279993#0" expanded="false" />
-            <element signature="e#280024#280025#0" expanded="false" />
-            <element signature="e#291449#291450#0" expanded="false" />
-            <element signature="e#291480#291481#0" expanded="false" />
-            <element signature="e#299702#299703#0" expanded="false" />
-            <element signature="e#299759#299760#0" expanded="false" />
-            <element signature="e#300033#300034#0" expanded="false" />
-            <element signature="e#300078#300079#0" expanded="false" />
-            <element signature="e#300731#300732#0" expanded="false" />
-            <element signature="e#300775#300776#0" expanded="false" />
-            <element signature="e#300842#300843#0" expanded="false" />
-            <element signature="e#300903#300904#0" expanded="false" />
-            <element signature="e#302345#302346#0" expanded="false" />
-            <element signature="e#302395#302396#0" expanded="false" />
-            <element signature="e#302807#302808#0" expanded="false" />
-            <element signature="e#302868#302869#0" expanded="false" />
+            <element signature="e#2576#2577#0" expanded="false" />
+            <element signature="e#2617#2618#0" expanded="false" />
+            <element signature="e#2930#2931#0" expanded="false" />
+            <element signature="e#2963#2964#0" expanded="false" />
+            <element signature="e#3009#3010#0" expanded="false" />
+            <element signature="e#3076#3077#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/viewModel/MainActivityViewModel.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-          <folding>
-            <element signature="method#onButtonAddFriendClick#0;class#MainActivityViewModel#0" expanded="false" />
-            <element signature="method#clickedFindFriend#0;class#MainActivityViewModel#0" expanded="false" />
-            <element signature="e#4250#4251#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="110">
+          <caret line="5" column="8" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="10" selection-end-column="44" />
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
+        <state relative-caret-position="1760">
           <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding />
         </state>
@@ -3991,76 +3656,150 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/app/ActivityThread.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="3360" column="0" lean-forward="false" selection-start-line="3360" selection-start-column="0" selection-end-line="3360" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="10" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/friend.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-633">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/post.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/post.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/adapter/PostViewHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/UserActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/MasterDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/PeopleDetectorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state relative-caret-position="220">
+          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding>
-            <marker date="1520213888511" expanded="false" signature="3028:3039" ph=" { " />
-            <marker date="1520213888511" expanded="false" signature="3051:3057" ph=" }" />
+            <element signature="e#889#903#0" expanded="true" />
+            <element signature="e#979#1012#0" expanded="true" />
+            <element signature="e#1051#1084#0" expanded="true" />
+            <element signature="e#1122#1149#0" expanded="true" />
+            <element signature="e#1502#1535#0" expanded="true" />
+            <element signature="e#1575#1608#0" expanded="true" />
+            <element signature="e#1679#1693#0" expanded="true" />
+            <element signature="e#1985#2018#0" expanded="true" />
+            <element signature="e#2057#2090#0" expanded="true" />
+            <element signature="e#2128#2155#0" expanded="true" />
+            <element signature="e#2246#2260#0" expanded="true" />
+            <marker date="1523239698446" expanded="false" signature="2544:2558" ph="&quot;16sp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="2634:2667" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="2706:2739" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="2777:2804" ph="&quot;30dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3157:3190" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3230:3263" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3334:3348" ph="&quot;16sp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3640:3673" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3712:3745" ph="&quot;10dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3783:3810" ph="&quot;30dp&quot;" />
+            <marker date="1523239698446" expanded="false" signature="3901:3915" ph="&quot;16sp&quot;" />
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/detector/LocationDetector.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/fragment_profile.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3647#4271#0" expanded="true" />
-            <element signature="e#4270#4271#0" expanded="true" />
+            <element signature="e#889#903#0" expanded="true" />
+            <element signature="e#979#1012#0" expanded="true" />
+            <element signature="e#1051#1084#0" expanded="true" />
+            <element signature="e#1122#1149#0" expanded="true" />
+            <element signature="e#1502#1535#0" expanded="true" />
+            <element signature="e#1575#1608#0" expanded="true" />
+            <element signature="e#1679#1693#0" expanded="true" />
+            <element signature="e#1985#2018#0" expanded="true" />
+            <element signature="e#2057#2090#0" expanded="true" />
+            <element signature="e#2128#2155#0" expanded="true" />
+            <element signature="e#2246#2260#0" expanded="true" />
+            <marker date="1523239755494" expanded="false" signature="2573:2587" ph="&quot;16sp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="2663:2696" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="2735:2768" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="2806:2833" ph="&quot;30dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3186:3219" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3259:3292" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3363:3377" ph="&quot;16sp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3669:3702" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3741:3774" ph="&quot;10dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3812:3839" ph="&quot;30dp&quot;" />
+            <marker date="1523239755494" expanded="false" signature="3930:3944" ph="&quot;16sp&quot;" />
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/fragment/ProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="62" column="23" lean-forward="true" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+        <state relative-caret-position="259">
+          <caret line="84" column="57" lean-forward="false" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosa/diplomska/view/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1262">
-          <caret line="918" column="10" lean-forward="true" selection-start-line="918" selection-start-column="10" selection-end-line="918" selection-end-column="10" />
+        <state relative-caret-position="478">
+          <caret line="1000" column="53" lean-forward="false" selection-start-line="1000" selection-start-column="53" selection-end-line="1000" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8969#9078#0" expanded="false" />
+            <element signature="e#9056#9165#0" expanded="false" />
             <element signature="method#getProfileFragment#0;class#MainActivity#0" expanded="false" />
             <element signature="method#saveProfileChanges#0;class#MainActivity#0" expanded="false" />
             <element signature="method#endEditMode#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
             <element signature="method#setUpMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#startLoginActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onNavItemSelected#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#mnAlertDialog#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getHomeFragment#0;class#MainActivity#0" expanded="false" />
             <element signature="method#setHomePosts#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getFriendsFragment#0;class#MainActivity#0" expanded="false" />
@@ -4070,29 +3809,34 @@
             <element signature="method#clickedAddFriend#0;class#MainActivity#0" expanded="false" />
             <element signature="method#disableFindFriendInterface#0;class#MainActivity#0" expanded="false" />
             <element signature="method#enableFindFriendInterface#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#24238#24259#0" expanded="false" />
-            <element signature="e#25643#25680#0" expanded="false" />
-            <element signature="e#26678#26756#0" expanded="false" />
-            <element signature="method#onSaveInstanceState#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#24325#24346#0" expanded="false" />
+            <element signature="e#25730#25767#0" expanded="false" />
+            <element signature="e#26765#26843#0" expanded="false" />
             <element signature="method#checkIfBTSupported#0;class#MainActivity#0" expanded="false" />
             <element signature="method#checkIfMusicDetectionSupported#0;class#MainActivity#0" expanded="false" />
             <element signature="method#checkIfMotionDetectionSupported#0;class#MainActivity#0" expanded="false" />
             <element signature="method#checkIfGPSSupported#0;class#MainActivity#0" expanded="false" />
             <element signature="method#checkIfGooglePlayServicesAvailable#0;class#MainActivity#0" expanded="false" />
             <element signature="method#askPermissions#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#30629#30673#0" expanded="false" />
-            <element signature="e#34476#34517#0" expanded="false" />
-            <element signature="method#requestActivityUpdatesButtonHandler#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#38728#38763#0" expanded="false" />
+            <element signature="e#30719#30763#0" expanded="false" />
+            <element signature="method#checkSensorSupport#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#34566#34607#0" expanded="false" />
+            <element signature="method#startSongDetection#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#startPeopleDetection#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#startLocationDetection#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#39243#39278#0" expanded="false" />
             <element signature="method#removeActivityUpdatesButtonHandler#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#39398#39433#0" expanded="false" />
-            <element signature="e#39832#39890#0" expanded="false" />
+            <element signature="e#39913#39948#0" expanded="false" />
+            <element signature="e#40347#40405#0" expanded="false" />
             <element signature="method#getActivityDetectionPendingIntent#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#activityDetectedDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#41533#41898#0" expanded="true" />
+            <element signature="e#41897#41898#0" expanded="true" />
             <element signature="method#registerDetectionReceivers#0;class#MainActivity#0" expanded="false" />
             <element signature="method#unregisterDetectionReceivers#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#42716#42734#0" expanded="false" />
-            <marker date="1520214219303" expanded="false" signature="31341:31699" ph="//..." />
+            <element signature="e#43372#43390#0" expanded="false" />
+            <marker date="1523240294961" expanded="false" signature="31431:31789" ph="//..." />
           </folding>
         </state>
       </provider>

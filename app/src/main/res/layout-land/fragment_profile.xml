@@ -12,6 +12,41 @@
         android:layout_height="match_parent"
         tools:context="com.example.rosa.diplomska.view.fragment.ProfileFragment">
 
+        <TextView
+            android:id="@+id/editTextProfileUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.username}"
+            android:textSize="@dimen/title"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top" />
+
+        <TextView
+            android:id="@+id/editTextProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextProfileUsername"
+            android:layout_marginTop="17dp"
+            android:enabled="false"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:text="@{user.email}"
+            android:textSize="@dimen/title"/>
+
+        <TextView
+            android:id="@+id/editTextProfileOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.description}"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:layout_below="@+id/editTextProfileEmail"
+            android:textSize="@dimen/title"/>
+        <!-- za kasneje, ko bo dodana moznost spreminjanja podatkov
         <EditText
             android:id="@+id/editTextProfileUsername"
             android:layout_width="match_parent"
@@ -87,7 +122,7 @@
             android:onClick="@{(v) -> mavm.onCancelEditClick()}"
             android:visibility="invisible"
             android:src="@drawable/edit_cancel"/>
-
+        -->
         <TextView
             android:id="@+id/textViewMyActivities"
             android:layout_width="match_parent"

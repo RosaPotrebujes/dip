@@ -68,21 +68,21 @@ public class ProfileFragment extends Fragment {
     }
 
     public void editModeOn() {
-        binding.editProfileData.setVisibility(View.INVISIBLE);
+    /*    binding.editProfileData.setVisibility(View.INVISIBLE);
         binding.editProfileConfirm.setVisibility(View.VISIBLE);
         binding.editProfileCancel.setVisibility(View.VISIBLE);
         binding.editTextProfileUsername.setEnabled(true);
         binding.editTextProfileEmail.setEnabled(true);
-        binding.editTextProfileOther.setEnabled(true);
+        binding.editTextProfileOther.setEnabled(true);*/
     }
 
     public void editModeOff() {
-        binding.editProfileData.setVisibility(View.VISIBLE);
+/*        binding.editProfileData.setVisibility(View.VISIBLE);
         binding.editProfileConfirm.setVisibility(View.INVISIBLE);
         binding.editProfileCancel.setVisibility(View.INVISIBLE);
         binding.editTextProfileUsername.setEnabled(false);
         binding.editTextProfileEmail.setEnabled(false);
-        binding.editTextProfileOther.setEnabled(false);
+        binding.editTextProfileOther.setEnabled(false);*/
     }
 
     public void notifyProfileAdapterOfChange() {

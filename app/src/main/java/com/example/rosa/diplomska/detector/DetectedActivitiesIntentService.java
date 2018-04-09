@@ -54,9 +54,9 @@ public class DetectedActivitiesIntentService extends IntentService {
             }
             //Log.i(TAG, getActivityString(da.getType()) + " " + da.getConfidence() + "%");
         }
-        //if(defaultConfidence > maxConfidence) {
-        //    activity = "hanging out";
-        //}
+        if(defaultConfidence > maxConfidence) {
+            activity = "hanging out";
+        }
 
 
         Log.i(TAG,"Detected activity: "+activity);

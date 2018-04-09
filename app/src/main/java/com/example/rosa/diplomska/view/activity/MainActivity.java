@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
@@ -16,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -651,7 +653,7 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     public void onSaveInstanceState(Bundle bundle){
         super.onSaveInstanceState(bundle);
         bundle.putBoolean("detectionInProgress",detectionInprogress);
-        if(detectionInprogress) {
+       // if(detectionInprogress) {
             bundle.putBoolean("gotMusic",ua.getGotMusic());
             if(ua.getGotMusic()) {
                 bundle.putString("uaMusic",ua.getUaMusic());
@@ -677,7 +679,7 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
                 bundle.putInt("uaPeople",0);
             }
             bundle.putString("uaUsername",getUser().getUsername());
-        }
+        //}
 
 
         bundle.putBoolean("wasDismissed",wasDismissed);
@@ -694,7 +696,6 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
             bundle.putString("mNavAlertDialogMessage",mNavAlertDialogMessage);
         }
     }
-
 
     @Override
     public boolean checkIfBTSupported() {
@@ -829,7 +830,7 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
     }
 
     private ActivityRecognitionClient mActivityRecognitionClient;
-    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 10 * 1000; // 5 seconds
+    static final long DETECTION_INTERVAL_IN_MILLISECONDS = 5 * 1000; // 5 seconds
 
     @Override
     public void startDetection() {
@@ -837,10 +838,17 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
            return;
         }
         detectionInprogress = true;
+        //binding.fab.setEnabled(false);
         if(pref == null) {
             pref = PreferenceManager.getDefaultSharedPreferences(this);
         }
+        //TODO: ZAČASNA REŠITEV, DOKLER NE UGOTOVIM ZAKAJ JE CRASHAL - SKLEPAM DA JE ORIENTACIJA
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        //mnAlertDialog("","Detection started.");
         //pref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+        Snackbar snackbar = Snackbar
+                .make(binding.coordinatorMain, "Activity detection started.", Snackbar.LENGTH_LONG);
+        snackbar.show();
 
         checkSensorSupport();
 
@@ -978,6 +986,10 @@ public class MainActivity extends AppCompatActivity implements MainNavigator,
 
     @Override
     public void activityDetectedDialog(String title, final String post) {
+        //TODO: začasna rešitev. mislim da je problem orientacija
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+
         unregisterDetectionReceivers();
         Log.i("DETECTED ACTIVITY"," "+post);
         detectionInprogress = false;

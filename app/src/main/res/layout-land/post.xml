@@ -43,13 +43,13 @@
                 android:layout_weight="1"
                 android:text="@{post.content}" />
         </LinearLayout>
-        <ImageView
+        <!--ImageView
             android:id="@+id/home_fav_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_star_border"
             android:clickable="true"
-            android:tag="unfav"/>
+            android:tag="unfav"/-->
     </LinearLayout>
 </layout>
