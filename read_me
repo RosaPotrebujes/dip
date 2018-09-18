@@ -16,6 +16,55 @@ Uporabnik s pritiskom na gumb sproži zaznavanje. Ko je zaznavanje končano se u
 prikaže rezultat, ki ga uporabnik lahko doda med svoje objave.
 Uporabnik lahko doda druge uporabnike in vidi njihove objave.
 
+Aplikacija uporablja MVVM, DataBinding, Room DAO Library.
+Ima 2 aktivnosti: Login in Main.
+
+LoginActivity
+-LoginFragment -> vpis uporabnika
+-RegisterFragment -> registracija uporabnika
+
+MainActivity
+-AboutFragment -> o aplikaciji
+-AddFriendDialogFragment -> dialog za dodajanje prijateljev
+-DetectActivityFragment -> dialog za zaznavanje aktivnosti
+-FriendsFragment -> pregled prijateljev
+-HomeFragment -> domača stran
+-ProfileFragment -> profil
+-SettingsFragment -> nastavitve
+
+V mapi adapter imamo vse, kar potrebujemo za naš recycler adapter.
+Uporabljamo ga za prikaz objav in prikaz prijateljev uporabnika.
+
+v mapi model hranimo naše podatke.
+-LoginCredentials -> preverjanje podatkov ob vpisu uporabnika.
+-Registration -> uporabljamo pri registraciji uporabnika
+-data -> v tej mapi imamo vse kar potrebujemo za shranjevanje 
+podatkov v naši aplikaciji z Room DAO
+-entity -> naši objekti, ki hranijo podatke (User in Post)
+
+-navigator -> Login in MainNavigator skrbita za navigacijo po 
+aplikaciji. Skrbita tudi za pridobivanje podatkov iz strežnika 
+oziroma baze in za vsa obvestila, ki se prikažejo uporabniku.
+
+-viewModel -> hrani vse ViewModele naše aplikacije.
+
+-volley -> vse kar potrebujemo za komunikacijo s stežnikom.
+Razred DataProvider skrbi za pridobivanje podatkov iz strežnika 
+oziroma za pošiljanje podatkov na strežnik.
+
+-detector -> tu imamo vse razrede, ki skrbijo za zaznavanje 
+naše aplikacije.
+-PeopleDetectorService skrbi za zaznavanje števila ljudi.
+-SongDetectorService skrbi za zaznavanje glasbe.
+-UserActivity skrbi za sam proces zaznavanja (čaka, da se 
+vsa zaznavanja končajo in vrne odgovor).
+-LocationDetector skrbi za zaznavanje lokacije.
+-DetectedActivitiesIntentService skrbi za zanavanje aktivnosti.
+-MasterDetector je razred, ki preveri, če imamo vse potrebne 
+senzorje in pravice na voljo. Sproži samo zaznavanje in ob 
+končanju prikaže rezultat uporabniku.
+
+
 ----------------------------------------------------------------------------------------
 
 Mobile application for providing user context on events
@@ -30,7 +79,6 @@ You need to register in order to use this application.
 User starts activity recognition with pressing a button. After the activity is detected 
 the result is show. User can then decide to post the result or discard it.
 User can add other users and see their posts.
-
 
 
 
