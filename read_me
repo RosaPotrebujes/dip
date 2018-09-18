@@ -1,0 +1,39 @@
+Mobilna aplikacija za podajanje konteksta uporabnika na prireditvah
+DIPLOMSKO DELO
+VISOKOŠOLSKI STROKOVNI ŠTUDIJSKI PROGRAM PRVE STOPNJE RAČUNALNIŠTVO IN INFORMATIKA
+
+Avtorica: Rosanda Potrebuješ
+Mentor: doc. dr. Veljko Pejović
+Ljubljana, 2018
+
+Koda je del diplomske naloge. Vsebuje mobilno aplikacijo za operacijski sistem 
+Android. Aplikacija omogoča zaznavanje lokacije uporabnika, števila ljudi v okolici, 
+glasbe, ki jo uporabnik posluša in gibanje uporabnika.
+
+Za uporabo aplikacije se je potrebno registrirati.
+
+Uporabnik s pritiskom na gumb sproži zaznavanje. Ko je zaznavanje končano se uporabniku 
+prikaže rezultat, ki ga uporabnik lahko doda med svoje objave.
+Uporabnik lahko doda druge uporabnike in vidi njihove objave.
+
+----------------------------------------------------------------------------------------
+
+Mobile application for providing user context on events
+Thesis
+
+This code is part of thesis. It contains mobile application for Android.
+The application allows us to detect user location, number of people around 
+user, music that the user is listening to and user's activity.
+
+You need to register in order to use this application.
+
+User starts activity recognition with pressing a button. After the activity is detected 
+the result is show. User can then decide to post the result or discard it.
+User can add other users and see their posts.
+
+
+
+
+
+
+
