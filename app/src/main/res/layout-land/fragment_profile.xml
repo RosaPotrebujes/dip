@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View" />
+        <variable name="user" type="com.example.rosa.diplomska.model.Entity.User"/>
+        <variable name="mavm" type="com.example.rosa.diplomska.viewModel.MainActivityViewModel"/>
+    </data>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:focusableInTouchMode="true"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.rosa.diplomska.view.fragment.ProfileFragment">
+
+            <TextView
+                android:id="@+id/editTextProfileUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.username}"
+                android:textSize="@dimen/title"
+                android:enabled="false"
+                android:layout_marginRight="@dimen/left_right_layout_margin"
+                android:layout_marginLeft="@dimen/left_right_layout_margin"
+                android:layout_marginTop="@dimen/profile_margin_top" />
+
+            <TextView
+                android:id="@+id/editTextProfileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextProfileUsername"
+                android:layout_marginTop="17dp"
+                android:enabled="false"
+                android:layout_marginLeft="@dimen/left_right_layout_margin"
+                android:layout_marginRight="@dimen/left_right_layout_margin"
+                android:text="@{user.email}"
+                android:textSize="@dimen/title"/>
+
+            <TextView
+                android:id="@+id/editTextProfileOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.description}"
+                android:enabled="false"
+                android:layout_marginRight="@dimen/left_right_layout_margin"
+                android:layout_marginLeft="@dimen/left_right_layout_margin"
+                android:layout_marginTop="@dimen/profile_margin_top"
+                android:layout_below="@+id/editTextProfileEmail"
+                android:textSize="@dimen/title"/>
+            <TextView
+                android:id="@+id/textViewMyActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_activities"
+                android:textSize="@dimen/title"
+                android:layout_marginLeft="@dimen/left_right_layout_margin"
+                android:layout_marginRight="@dimen/left_right_layout_margin"
+                android:layout_marginTop="@dimen/profile_edit_margin"
+                android:layout_below="@+id/editTextProfileOther" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_profile"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profile_edit_margin"
+                android:layout_below="@+id/textViewMyActivities"/>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</layout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View" />
+        <variable name="user" type="com.example.rosa.diplomska.model.Entity.User"/>
+        <variable name="mavm" type="com.example.rosa.diplomska.viewModel.MainActivityViewModel"/>
+    </data>
+    <RelativeLayout
+        android:focusableInTouchMode="true"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.rosa.diplomska.view.fragment.ProfileFragment">
+
+        <TextView
+            android:id="@+id/editTextProfileUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.username}"
+            android:textSize="@dimen/title"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top" />
+
+        <TextView
+            android:id="@+id/editTextProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextProfileUsername"
+            android:layout_marginTop="17dp"
+            android:enabled="false"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:text="@{user.email}"
+            android:textSize="@dimen/title"/>
+
+        <TextView
+            android:id="@+id/editTextProfileOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.description}"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:layout_below="@+id/editTextProfileEmail"
+            android:textSize="@dimen/title"/>
+        < ! / / za kasneje, ko bo dodana moznost spreminjanja podatkov
+        <EditText
+            android:id="@+id/editTextProfileUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.username}"
+            android:textSize="@dimen/title"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top" />
+
+        <EditText
+            android:id="@+id/editTextProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextProfileUsername"
+            android:layout_marginTop="17dp"
+            android:enabled="false"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:text="@{user.email}"
+            android:textSize="@dimen/title"/>
+
+        <EditText
+            android:id="@+id/editTextProfileOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.description}"
+            android:enabled="false"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:layout_below="@+id/editTextProfileEmail"
+            android:textSize="@dimen/title"/>
+
+        <ImageView
+            android:id="@+id/edit_profile_data"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/edit_click"
+            android:clickable="true"
+            android:onClick="@{(v) -> mavm.onEditDataClick()}"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/editTextProfileOther"
+            android:layout_alignRight="@+id/editTextProfileOther"
+            android:layout_alignEnd="@+id/editTextProfileOther"/>
+
+        <ImageView
+            android:id="@+id/edit_profile_confirm"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/edit_confirm"
+            android:clickable="true"
+            android:onClick="@{(v) -> mavm.onConfirmEditClick()}"
+            android:visibility="invisible"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/editTextProfileOther"
+            android:layout_toLeftOf="@id/edit_profile_data"/>
+
+        <ImageView
+            android:id="@+id/edit_profile_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/textViewMyActivities"
+            android:layout_alignEnd="@+id/edit_profile_data"
+            android:layout_alignRight="@+id/edit_profile_data"
+            android:layout_alignTop="@+id/edit_profile_data"
+            android:layout_toEndOf="@+id/edit_profile_confirm"
+            android:layout_toRightOf="@+id/edit_profile_confirm"
+            android:clickable="true"
+            android:onClick="@{(v) -> mavm.onCancelEditClick()}"
+            android:visibility="invisible"
+            android:src="@drawable/edit_cancel"/>
+        - - >
+        <TextView
+            android:id="@+id/textViewMyActivities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/my_activities"
+            android:textSize="@dimen/title"
+            android:layout_marginLeft="@dimen/left_right_layout_margin"
+            android:layout_marginRight="@dimen/left_right_layout_margin"
+            android:layout_marginTop="@dimen/profile_edit_margin"
+            android:layout_below="@+id/editTextProfileOther" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_profile"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_edit_margin"
+            android:layout_below="@+id/textViewMyActivities"/>
+    </RelativeLayout>
+</layout>-->

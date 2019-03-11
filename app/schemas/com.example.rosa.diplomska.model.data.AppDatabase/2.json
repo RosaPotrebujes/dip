@@ -1,0 +1,171 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "e282b984907a181aece5777879059bc6",
+    "entities": [
+      {
+        "tableName": "user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT, `email` TEXT, `description` TEXT, `pending` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "userID",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pending",
+            "columnName": "pending",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_user_userId",
+            "unique": true,
+            "columnNames": [
+              "userId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_user_userId` ON `${TABLE_NAME}` (`userId`)"
+          },
+          {
+            "name": "index_user_pending",
+            "unique": false,
+            "columnNames": [
+              "pending"
+            ],
+            "createSql": "CREATE  INDEX `index_user_pending` ON `${TABLE_NAME}` (`pending`)"
+          },
+          {
+            "name": "index_user_username",
+            "unique": true,
+            "columnNames": [
+              "username"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_user_username` ON `${TABLE_NAME}` (`username`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "post",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postId` INTEGER NOT NULL, `posterId` INTEGER NOT NULL, `posterUsername` TEXT, `content` TEXT, `timestamp` TEXT, `favouriteCounter` INTEGER NOT NULL, `isUserFav` INTEGER NOT NULL, PRIMARY KEY(`postId`))",
+        "fields": [
+          {
+            "fieldPath": "postId",
+            "columnName": "postId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posterId",
+            "columnName": "posterId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posterUsername",
+            "columnName": "posterUsername",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "favouriteCounter",
+            "columnName": "favouriteCounter",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isUserFav",
+            "columnName": "isUserFav",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "postId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_post_postId",
+            "unique": true,
+            "columnNames": [
+              "postId"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_post_postId` ON `${TABLE_NAME}` (`postId`)"
+          },
+          {
+            "name": "index_post_posterId",
+            "unique": false,
+            "columnNames": [
+              "posterId"
+            ],
+            "createSql": "CREATE  INDEX `index_post_posterId` ON `${TABLE_NAME}` (`posterId`)"
+          },
+          {
+            "name": "index_post_posterUsername",
+            "unique": false,
+            "columnNames": [
+              "posterUsername"
+            ],
+            "createSql": "CREATE  INDEX `index_post_posterUsername` ON `${TABLE_NAME}` (`posterUsername`)"
+          },
+          {
+            "name": "index_post_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "createSql": "CREATE  INDEX `index_post_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e282b984907a181aece5777879059bc6\")"
+    ]
+  }
+}
